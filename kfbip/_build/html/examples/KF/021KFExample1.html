@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/KF/021KFExample1';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3.6. EX2" href="021KFExample2.html" />
+    <link rel="next" title="3.6. Example 2 - scalar, Gaussian random walk" href="021KFExample2.html" />
     <link rel="prev" title="3. Kalman Filters" href="../../theory/021BasicKF.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -172,7 +172,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../theory/021BasicKF.html">3. Kalman Filters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">3.5. Example 1 - estimating a constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="021KFExample2.html">3.6. EX2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="021KFExample2.html">3.6. Example 2 - scalar, Gaussian random walk</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/022NlinKF.html">4. Title 4</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -361,32 +361,35 @@ converter is not very accurate).</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> denotes analysis (or correction)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">t</span></code> denotes the true value.</p></li>
 </ul>
-<p>In this example, our process is governed
-by the state equation,
-$<span class="math notranslate nohighlight">\(\begin{align*}
+<p>In this scalar, 1D example, our process is governed
+by the state equation,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 x_{k} &amp; = F x_{k-1}+w_{k}=x_{k-1}+w_{k}
-\end{align*}\)</span><span class="math notranslate nohighlight">\(
-and the measurement equation,
-\)</span><span class="math notranslate nohighlight">\(\begin{align*}
+\end{align*}\]</div>
+<p>and the measurement equation,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 y_{k} &amp; = H x_{k}+v_{k} = x^{\mathrm{t}} + v_{k}.
-\end{align*}\)</span><span class="math notranslate nohighlight">\(
-The state, being constant, does not change from step to step, so \)</span>F=I.<span class="math notranslate nohighlight">\( Our noisy measurement
-is of the state directly so \)</span>H=1.$</p>
-<p>The time-update (forecast) equations are,
-$<span class="math notranslate nohighlight">\(\begin{align}
+\end{align*}\]</div>
+<p>The state, being constant, does not change from step to step, so <span class="math notranslate nohighlight">\(F=I.\)</span> Our noisy measurement
+is of the state directly so <span class="math notranslate nohighlight">\(H=1.\)</span></p>
+<p>The time-update (forecast) equations are,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7b089eb5-c538-4cef-b3d7-e2ac6d22a97c">
+<span class="eqno">(3.10)<a class="headerlink" href="#equation-7b089eb5-c538-4cef-b3d7-e2ac6d22a97c" title="Permalink to this equation">#</a></span>\[\begin{align}
 x_{k+1}^{\mathrm{f}} &amp; =  x_{k}^{\mathrm{a}}\,,\\
 P_{k+1}^{\mathrm{f}} &amp; =  P_{k}^{\mathrm{a}}+Q
-\end{align}\)</span><span class="math notranslate nohighlight">\(
-and the measurement update (analysis) equations are
-\)</span><span class="math notranslate nohighlight">\(\begin{align}
+\end{align}\]</div>
+<p>and the measurement update (analysis) equations are</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1d1c57e7-98fd-4911-8039-60dced9ef5fc">
+<span class="eqno">(3.11)<a class="headerlink" href="#equation-1d1c57e7-98fd-4911-8039-60dced9ef5fc" title="Permalink to this equation">#</a></span>\[\begin{align}
 K_{k+1} &amp; = P_{k+1}^{\mathrm{f}}(P_{k+1}^{\mathrm{f}}+R)^{-1},\\
 x_{k+1}^{\mathrm{a}} &amp; = x_{k+1}^{\mathrm{f}}+K_{k+1}(y_{k+1}-x_{k+1}^{\mathrm{f}}),\\
 P_{k+1}^{\mathrm{a}} &amp; = (1-K_{k+1})P_{k+1}^{\mathrm{f}}.
-\end{align}\)</span>$</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Initialization
-Presuming a very small process variance,
+\end{align}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Initialization</p>
+<p>Presuming a very small process variance,
 we let <span class="math notranslate nohighlight">\(Q=1.\mathrm{e}-5\)</span>. We could certainly let <span class="math notranslate nohighlight">\(Q=0\)</span> but assuming a small
 but non-zero value gives us more flexibility in  tuning
 the filter as we will demonstrate below. Let us assume
@@ -458,14 +461,11 @@ by a <span class="math notranslate nohighlight">\(0.1\)</span> volt RMS white me
     <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xhat</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;KF posterior estimate&#39;</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;true value&#39;</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="c1">#ax1.set_title(&#39;Estimate vs. iteration step&#39;, fontweight=&#39;bold&#39;)</span>
-    <span class="c1">#ax1.set(xlabel=&#39;Iteration&#39;, ylabel=&#39;Voltage&#39;)</span>
     
     <span class="n">valid_iter</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n_iter</span><span class="p">)</span> <span class="c1"># Pminus not valid at step 0</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">valid_iter</span><span class="p">,</span><span class="n">Pminus</span><span class="p">[</span><span class="n">valid_iter</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;a priori error estimate&#39;</span><span class="p">)</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="c1">#ax2.plot(valid_iter,Pminus[valid_iter],label=&#39;a priori error estimate&#39;)</span>
-    <span class="c1">#ax2.set_title(&#39;Estimated $\it{\mathbf{a \ priori}}$ error vs. iteration step&#39;, fontweight=&#39;bold&#39;)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Iteration&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Voltage$^2$&#39;</span><span class="p">)</span> <span class="c1">#, ylim=[0,.01])</span>
 </pre></div>
 </div>
@@ -479,8 +479,51 @@ by a <span class="math notranslate nohighlight">\(0.1\)</span> volt RMS white me
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3ef2a168e186d141dc425f05f1890bc84f039209893a8c8a4791aeddfdf68e64.png" src="../../_images/3ef2a168e186d141dc425f05f1890bc84f039209893a8c8a4791aeddfdf68e64.png" />
+<img alt="../../_images/dacb340eb7392618b877bfe4b078fcbe1ff4f9c6da71c4f26576bbd787e9d163.png" src="../../_images/dacb340eb7392618b877bfe4b078fcbe1ff4f9c6da71c4f26576bbd787e9d163.png" />
 </div>
+</div>
+<p>In this first simulation we fixed the measurement variance at <span class="math notranslate nohighlight">\(R=(0.1)^{2}=0.01.\)</span>
+Because this is the “true” measurementerror variance, we would expect the “best”
+performance in terms of balancing responsiveness and estimate variance.
+This will become more evident in the second and third simulations.</p>
+<p>The above figure depicts the results of this first simulation.
+The true value of the random constant <span class="math notranslate nohighlight">\(x=-0.37727\)</span> is given by the
+solid  line, the noisy measurements by the dots and the filter
+estimate by the blue curve.</p>
+<p>Now, we will see what happens when the measurement error variance <span class="math notranslate nohighlight">\(R\)</span> is
+increased or decreased by a factor of <span class="math notranslate nohighlight">\(100\)</span> respectively.</p>
+<ul class="simple">
+<li><p>first, the filter was told that the measurement variance was <span class="math notranslate nohighlight">\(100\)</span> times greater (i.e. <span class="math notranslate nohighlight">\(R=1\)</span>) so it was “slower” to believe the measurements.</p></li>
+<li><p>then, the filter was told that the measurement variance was <span class="math notranslate nohighlight">\(100\)</span> times smaller (i.e. <span class="math notranslate nohighlight">\(R=0.0001\)</span> ) so it was very “quick” to believe the noisy measurements.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># increase R = 1</span>
+<span class="n">KF_ct</span><span class="p">(</span><span class="n">sig_v</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b6ce33aab7afa0e4c2ed666aa0adea519c1d79ff7c6685b7ef9a7f46a5ad0cf4.png" src="../../_images/b6ce33aab7afa0e4c2ed666aa0adea519c1d79ff7c6685b7ef9a7f46a5ad0cf4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># decrease R = 0.0001</span>
+<span class="n">KF_ct</span><span class="p">(</span><span class="n">sig_v</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0e6b4188b4dc19e4e1bfe36d01cacde7d7b915846e72b2ebd363e58d8c145ff1.png" src="../../_images/0e6b4188b4dc19e4e1bfe36d01cacde7d7b915846e72b2ebd363e58d8c145ff1.png" />
+</div>
+</div>
+<div class="danger admonition">
+<p class="admonition-title">Conclusion</p>
+<p>While the estimation of a constant is relatively straightforward, this example clearly demonstrates the
+workings of the Kalman filter. In the second Figure (R=1) in particular, the Kalman filtering is evident
+as the estimate appears considerably smoother than the noisy measurements.
+We observe the speed of convergence of the variance in the bottom subplot of the respective Figures.</p>
 </div>
 </section>
 
@@ -528,7 +571,7 @@ by a <span class="math notranslate nohighlight">\(0.1\)</span> volt RMS white me
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.6. </span>EX2</p>
+        <p class="prev-next-title"><span class="section-number">3.6. </span>Example 2 - scalar, Gaussian random walk</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

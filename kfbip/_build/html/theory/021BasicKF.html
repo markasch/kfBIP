@@ -172,12 +172,14 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">3. Kalman Filters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample1.html">3.5. Example 1 - estimating a constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample2.html">3.6. EX2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample2.html">3.6. Example 2 - scalar, Gaussian random walk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample3.html">3.7. Example 3 - constant-velocity 1D position tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample4.html">3.8. Example 4 - constant-velocity 2D motion tracking</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="022NlinKF.html">4. Title 4</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/EKF/022EKFExample1.html">4.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/EKF/022EKFExample2.html">4.2. EX 2</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="022NlinKF.html">4. Nonlinear Kalman Filters</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EKF/022EKFExample1.html">4.5. Example 1 - tracking a random sinusoidal signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EKF/022EKFExample2.html">4.6. Example 2 - tracking a noisy pendulum</a></li>
 </ul>
 </li>
 </ul>
@@ -398,8 +400,8 @@ document.write(`
 \[v_0 \perp {\xi_j} \perp {\eta_j}\]</div>
 </li>
 <li><p>Operators:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6d066c87-b5a6-4477-8a01-e3b9558a946f">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-6d066c87-b5a6-4477-8a01-e3b9558a946f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-091dc90e-81b6-4683-a5da-120a9868dc05">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-091dc90e-81b6-4683-a5da-120a9868dc05" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 	  \Psi \colon \mathcal{H}_s &amp;\mapsto \mathcal{H}_s, \\
 	  h  \colon \mathcal{H}_s &amp;\mapsto \mathcal{H}_o,
 	 \end{eqnarray}\]</div>
@@ -413,8 +415,8 @@ document.write(`
 <li><p>all distributions are Gaussian.</p></li>
 </ul>
 <p>Suppose</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3eeea66-3a7c-4c4a-8478-91c2ac521624">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-c3eeea66-3a7c-4c4a-8478-91c2ac521624" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-0454fd1c-1be3-483d-9841-6795b0c5df46">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-0454fd1c-1be3-483d-9841-6795b0c5df46" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
    \Psi(v) &amp;= Mv \\
    h(v) &amp;= Hv,
 \end{eqnarray}\]</div>
@@ -431,15 +433,15 @@ document.write(`
 <ul>
 <li><p>P0: initialize <span class="math notranslate nohighlight">\((m_0, C_0)\)</span> and compute <span class="math notranslate nohighlight">\(v_0\)</span></p></li>
 <li><p>P1: predict the state, measurement</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8c9b535f-0f62-4486-a48a-8f516f71d621">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-8c9b535f-0f62-4486-a48a-8f516f71d621" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7491c542-239d-4456-9729-5c98097756aa">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-7491c542-239d-4456-9729-5c98097756aa" title="Permalink to this equation">#</a></span>\[\begin{align}
      v_{j+1} &amp;= M v_j + \xi_j \\
      y_{j+1} &amp;= H v_{j+1} + \eta_{j+1}
      \end{align}\]</div>
 </li>
 <li><p>P2: predict the mean and covariance</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f9ab32f5-e00b-4ae9-a5f5-d999e1a786dc">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-f9ab32f5-e00b-4ae9-a5f5-d999e1a786dc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d557ef57-36d2-4292-bfe8-f87fb1975d15">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-d557ef57-36d2-4292-bfe8-f87fb1975d15" title="Permalink to this equation">#</a></span>\[\begin{align}
      \hat{m}_{j+1}  &amp;= M m_j \\
      \hat{C}_{j+1}  &amp;= M C_j M^{\mathrm{T}} + \Sigma
      \end{align}\]</div>
@@ -464,8 +466,8 @@ document.write(`
 \[ K_{j+1} = \hat{C}_{j+1} H^{\mathrm{T}}  S_{j+1}^{-1} \]</div>
 </li>
 <li><p>C4: update/correct the mean and covariance</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1538ed53-26cd-45cf-a6de-7eda72119ed4">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-1538ed53-26cd-45cf-a6de-7eda72119ed4" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-be0d4077-de60-44ee-b1e4-05cc4683781e">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-be0d4077-de60-44ee-b1e4-05cc4683781e" title="Permalink to this equation">#</a></span>\[\begin{align}
      {m}_{j+1}  &amp;= \hat{m}_{j+1} + K_{j+1} d_{j+1}, \\
      {C}_{j+1}  &amp;= \hat{C}_{j+1} - K_{j+1}  S_{j+1}  K_{j+1}^{\mathrm{T}}.
      \end{align}\]</div>
@@ -483,8 +485,8 @@ document.write(`
 <section id="state-space-formulation">
 <h2><span class="section-number">3.3. </span>State-space formulation<a class="headerlink" href="#state-space-formulation" title="Permalink to this heading">#</a></h2>
 <p>In classical (linear) filter theory, a state space formulation is usually used.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-40a31458-b19d-4647-9b06-cb7bf155b49e">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-40a31458-b19d-4647-9b06-cb7bf155b49e" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-72a33728-f533-49d9-9fd4-bd8c1deb5d5f">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-72a33728-f533-49d9-9fd4-bd8c1deb5d5f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  &amp;&amp; x_{k+1}  = F x_k + B u_k + w_k \\
  &amp;&amp; y_{k+1}  = H x_k + v_k,
 \end{eqnarray}\]</div>
@@ -494,14 +496,14 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ x_0, \quad P_0 \]</div>
 <p><strong>1. Prediction</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-fb6123c3-e1d3-4cee-9a39-a430832ac408">
-<span class="eqno">(3.7)<a class="headerlink" href="#equation-fb6123c3-e1d3-4cee-9a39-a430832ac408" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-ac250760-b8d6-4602-85f7-52b28574c31a">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-ac250760-b8d6-4602-85f7-52b28574c31a" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  &amp;&amp; x_{k+1}^- = F x_k \\
  &amp;&amp; P_{k+1}^- = F P_k F^{\mathrm{T}} + Q 
 \end{eqnarray}\]</div>
 <p><strong>2. Correction</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8aae821-4bff-4d91-89f6-44c4ed974e45">
-<span class="eqno">(3.8)<a class="headerlink" href="#equation-e8aae821-4bff-4d91-89f6-44c4ed974e45" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-17851ea4-556d-448d-9571-bb3ddbd8f909">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-17851ea4-556d-448d-9571-bb3ddbd8f909" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
   K_{k+1} &amp;&amp; = P_{k+1}^{-} H^{\mathrm{T}} ( H  P_{k+1}^{-} H^{\mathrm{T}} + R )^{-1}
                \quad (= P_{k+1}^- H^{\mathrm{T}} S^{-1})\\
   x_{k+1} &amp;&amp;= x_{k+1}^{-} + K_{k+1} (y_{k+1} - H x_{k+1}^- ) \\
@@ -529,8 +531,8 @@ document.write(`
   \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = F \mathbf{x}(t) + L \mathbf{w}(t) , \quad \mathbf{x}(0) = \mathbf{x}_0,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{w}(t)\)</span> is a white, Gaussian noise process with expectation and covariance</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4838f483-e4cf-49e3-80b0-1e2fb4cfeeee">
-<span class="eqno">(3.9)<a class="headerlink" href="#equation-4838f483-e4cf-49e3-80b0-1e2fb4cfeeee" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ef4acbbe-3b7b-42bf-8656-f95745cf3b1d">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-ef4acbbe-3b7b-42bf-8656-f95745cf3b1d" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp; \mathrm{E}[\mathbf{w}(t)] = 0, \\
 &amp; \mathrm{Cov}[\mathbf{w}(\tau_1)\mathbf{w}(\tau_2)] = \delta(\tau_1 - \tau_2) Q^c
 \end{align}\]</div>

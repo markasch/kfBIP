@@ -45,7 +45,10 @@ parse:
     - dollarmath
     - colon_fence
     - html_image
-
+    - fieldlist
+    - html_admonition
+    - tasklist
+    - replacements
 
 # add license button and text to footnote
 sphinx:

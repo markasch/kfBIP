@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>4.2. EX 2 &#8212; kfBIP</title>
+    <title>4.6. Example 2 - tracking a noisy pendulum &#8212; kfBIP</title>
   
   
   
@@ -63,11 +63,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/EKF/022EKFExample2';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="5. Title 5" href="../../theory/031EnKFTheory.html" />
-    <link rel="prev" title="4.1. EX 1" href="022EKFExample1.html" />
+    <link rel="prev" title="4.5. Example 1 - tracking a random sinusoidal signal" href="022EKFExample1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,14 +170,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Kalman Filters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/021BasicKF.html">3. Title 3</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample1.html">3.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample2.html">3.2. EX2</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/021BasicKF.html">3. Kalman Filters</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample1.html">3.5. Example 1 - estimating a constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample2.html">3.6. Example 2 - scalar, Gaussian random walk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample3.html">3.7. Example 3 - constant-velocity 1D position tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample4.html">3.8. Example 4 - constant-velocity 2D motion tracking</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../theory/022NlinKF.html">4. Title 4</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="022EKFExample1.html">4.1. EX 1</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.2. EX 2</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../theory/022NlinKF.html">4. Nonlinear Kalman Filters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="022EKFExample1.html">4.5. Example 1 - tracking a random sinusoidal signal</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.6. Example 2 - tracking a noisy pendulum</a></li>
 </ul>
 </li>
 </ul>
@@ -249,7 +253,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/examples/EKF/022EKFExample2.md" target="_blank"
+      <li><a href="../../_sources/examples/EKF/022EKFExample2.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -259,7 +263,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -320,7 +324,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -331,11 +337,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>EX 2</h1>
+    <h1>Example 2 - tracking a noisy pendulum</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-kalman-filter-ekf">4.6.1. Extended Kalman Filter (EKF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-smoother">4.6.2. Extended Smoother</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions-on-extended-kalman-filters">4.6.3. Conclusions on Extended Kalman Filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">4.6.4. References</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -345,8 +362,314 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ex-2">
-<h1><span class="section-number">4.2. </span>EX 2<a class="headerlink" href="#ex-2" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="example-2-tracking-a-noisy-pendulum">
+<h1><span class="section-number">4.6. </span>Example 2 - tracking a noisy pendulum<a class="headerlink" href="#example-2-tracking-a-noisy-pendulum" title="Permalink to this heading">#</a></h1>
+<p><img alt="Pendulum motion" src="../../_images/pendulum.png" /></p>
+<p>Consider the nonlinear ODE model for the oscillations of a noisy pendulum with unit mass and length <span class="math notranslate nohighlight">\(L,\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+	\frac{\mathrm{d}^{2}\theta}{\mathrm{d} t^{2}}+\frac{g}{L}\sin\theta+w(t)=0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angular displacement of the pendulum, <span class="math notranslate nohighlight">\(g\)</span> is the gravitational constant, <span class="math notranslate nohighlight">\(L\)</span> is the pendulum’s length, and <span class="math notranslate nohighlight">\(w(t)\)</span> is a white noise process. This is rewritten in state space form,</p>
+<div class="math notranslate nohighlight">
+\[
+	\dot{\mathbf{x}}+\mathcal{M}(\mathbf{x})+\mathbf{w}=0,
+	\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+	\mathbf{x}=\left[\begin{array}{c}
+		x_{1}\\
+		x_{2}
+	\end{array}\right]=\left[\begin{array}{c}
+		\theta\\
+		\dot{\theta}
+	\end{array}\right],\quad
+     \mathcal{M}(\mathbf{x})=\left[\begin{array}{c}
+		x_{2}\\
+		-\dfrac{g}{L}\sin x_{1}
+	\end{array}\right],\quad
+    \mathbf{w}=\left[\begin{array}{c}
+		0\\
+		w(t)
+	\end{array}\right].
+	\end{split}\]</div>
+<p>Suppose that we have discrete, noisy measurements of the horizontal component of the position, <span class="math notranslate nohighlight">\(\sin (\theta).\)</span> Then the measurement equation is scalar,</p>
+<div class="math notranslate nohighlight">
+\[
+	y_k = \sin \theta_k + v_k, 
+	\]</div>
+<p>where <span class="math notranslate nohighlight">\(v_k\)</span> is a zero-mean Gaussian random variable with variance <span class="math notranslate nohighlight">\(R.\)</span> The system is thus nonlinear in state and measurement and the state-space system is of the general form seen above. A simple discretization, based on Euler’s method produces</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	\begin{align*}
+		\mathbf{x}_{k} &amp; =\mathcal{M}(\mathbf{x}_{k-1})+\mathbf{w}_{k-1}\\
+		  {y}_{k} &amp; = \mathcal{H}_{k}(\mathbf{x}_{k}) + {v}_{k}, 
+	\end{align*} \end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{x}_{k}=\left[\begin{array}{c}
+	x_{1}\\
+	x_{2}
+\end{array}\right]_{k}, \quad \mathcal{M}(\mathbf{x}_{k-1})=\left[\begin{array}{c}
+	x_1 + \Delta t x_{2}\\
+	x_2 - \Delta t  \dfrac{g}{L}\sin x_{1}
+\end{array}\right]_{k-1},  \quad  \mathcal{H}(\mathbf{x}_{k}) = [\sin x_{1}]_k . 
+\end{split}\]</div>
+<p>The noise terms have distributions</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{w}_{k-1}\sim\mathcal{N}(\mathbf{0},Q),\quad v_{k}\sim\mathcal{N}(0,R),
+\]</div>
+<p>where the process covariance matrix is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Q=\left[\begin{array}{cc}
+	q_{11} &amp; q_{12}\\
+	q_{21} &amp; q_{22}
+\end{array}\right],
+\end{split}\]</div>
+<p>with components (see KF example for 2D motion tracking),</p>
+<div class="math notranslate nohighlight">
+\[
+q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{2},\quad q_{22}=q_{c}\Delta t,
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(q_c\)</span> is the continuous process noise spectral density.</p>
+<p>For the first-order EKF—higher orders are possible—we will need the Jacobian matrices of <span class="math notranslate nohighlight">\( \mathcal{M}(\mathbf{x})\)</span> and <span class="math notranslate nohighlight">\(\mathcal{H}(\mathbf{x})\)</span> evaluated at <span class="math notranslate nohighlight">\(\mathbf{x} = \mathbf{\hat{m}}_{k-1}\)</span> and  <span class="math notranslate nohighlight">\(\mathbf{x} = \mathbf{\hat{m}}_{k}\)</span> . These are easily obtained here, in an explicit form,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{M}_{\mathbf{x}}=\left[\frac{\partial\mathcal{M}}{\partial\mathbf{x}}\right]_{\mathbf{x}=\mathbf{m}}=\left[\begin{array}{cc}
+	1 &amp; \Delta t\\
+	-\Delta t \dfrac{g}{L}\cos x_{1} &amp; 1
+\end{array}\right]_{k-1},
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{H}_{\mathbf{x}}=\left[\frac{\partial\mathcal{H}}{\partial\mathbf{x}}\right]_{\mathbf{x}=\mathbf{m}}=\left[\begin{array}{cc}
+	\cos x_{1} &amp; 0\end{array}\right]_k.
+\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Simulations</p>
+<p>In the simulations, we take:</p>
+<ul class="simple">
+<li><p>500 time steps with <span class="math notranslate nohighlight">\(\Delta t = 0.01.\)</span></p></li>
+<li><p>Noise levels <span class="math notranslate nohighlight">\(q_c=0.01\)</span> and <span class="math notranslate nohighlight">\(R=0.1.\)</span></p></li>
+<li><p>Initial angle <span class="math notranslate nohighlight">\(x_1 = 1.8\)</span> and initial angular velocity <span class="math notranslate nohighlight">\(x_2 = 0.\)</span></p></li>
+<li><p>Initial diagonal state covariance of <span class="math notranslate nohighlight">\(0.1.\)</span></p></li>
+</ul>
+</div>
+<p>Results are plotted in Figure. We notice that despite the very noisy, nonlinear measurements, the EKF rapidly approaches the true state and then tracks it extremely well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span><span class="p">,</span> <span class="n">stats</span>
+<span class="c1"># we use Sarkka&#39;s utilities to streamline a bit...</span>
+<span class="kn">from</span> <span class="nn">common_utilities</span> <span class="kn">import</span> <span class="n">generate_pendulum</span><span class="p">,</span> <span class="n">RandomState</span><span class="p">,</span> <span class="n">rmse</span><span class="p">,</span> <span class="n">plot_pendulum</span>
+<span class="c1"># initialize</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># time step</span>
+<span class="n">g</span>  <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># gravitational acceleration</span>
+
+<span class="n">sig_w</span> <span class="o">=</span> <span class="mf">0.1</span>          <span class="c1"># process noise</span>
+<span class="n">sig_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1"># measurement noise</span>
+
+<span class="n">Q</span>  <span class="o">=</span> <span class="n">sig_w</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">dt</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dt</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span> 
+                          <span class="p">[</span><span class="n">dt</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dt</span><span class="p">]])</span>
+<span class="n">R</span>  <span class="o">=</span> <span class="n">sig_v</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">x_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate trajectory and noisy measurements</span>
+<span class="n">random_state</span> <span class="o">=</span> <span class="n">RandomState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="n">timeline</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">observations</span> <span class="o">=</span> <span class="n">generate_pendulum</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
+<span class="n">plot_pendulum</span><span class="p">(</span><span class="n">timeline</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="s2">&quot;Trajectory&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/392f9b55b9bca6c1ed86a98351e5a3bab6cde5a7dfdea1dd136d122b9d1cf754.png" src="../../_images/392f9b55b9bca6c1ed86a98351e5a3bab6cde5a7dfdea1dd136d122b9d1cf754.png" />
+</div>
+</div>
+<section id="extended-kalman-filter-ekf">
+<h2><span class="section-number">4.6.1. </span>Extended Kalman Filter (EKF)<a class="headerlink" href="#extended-kalman-filter-ekf" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extended_kalman_filter</span><span class="p">(</span><span class="n">m_0</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">observations</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">m_0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="n">ekf_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">steps</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">ekf_P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">steps</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    
+    <span class="n">m</span> <span class="o">=</span> <span class="n">m_0</span><span class="p">[:]</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_0</span><span class="p">[:]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+        <span class="c1"># Jacobian of the dynamic model function</span>
+        <span class="n">Df</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span>                     <span class="n">dt</span><span class="p">],</span> 
+                      <span class="p">[</span><span class="o">-</span><span class="n">g</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mf">1.</span><span class="p">]])</span>
+        
+        <span class="c1"># Predicted state distribution</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">g</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">Df</span> <span class="o">@</span> <span class="n">P</span> <span class="o">@</span> <span class="n">Df</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">Q</span>
+        
+        <span class="c1"># Predicted observation</span>
+        <span class="n">h</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">Dh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mf">0.</span><span class="p">]])</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">Dh</span> <span class="o">@</span> <span class="n">P</span> <span class="o">@</span> <span class="n">Dh</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">R</span>
+        
+        <span class="c1"># Kalman Gain</span>
+        <span class="n">K</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">Dh</span> <span class="o">@</span> <span class="n">P</span><span class="p">,</span> <span class="n">assume_a</span><span class="o">=</span><span class="s2">&quot;pos&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> 
+        <span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">K</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">K</span> <span class="o">@</span> <span class="n">S</span> <span class="o">@</span> <span class="n">K</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="n">ekf_m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="n">ekf_P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span>
+    <span class="k">return</span> <span class="n">ekf_m</span><span class="p">,</span> <span class="n">ekf_P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize state and covariance</span>
+<span class="n">m_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>  <span class="c1"># Slightly off</span>
+<span class="n">P_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> 
+                <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]])</span>
+
+<span class="n">ekf_m</span><span class="p">,</span> <span class="n">ekf_P</span> <span class="o">=</span> <span class="n">extended_kalman_filter</span><span class="p">(</span><span class="n">m_0</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">observations</span><span class="p">)</span>
+<span class="n">plot_pendulum</span><span class="p">(</span><span class="n">timeline</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="s2">&quot;Trajectory&quot;</span><span class="p">,</span> <span class="n">ekf_m</span><span class="p">,</span> <span class="s2">&quot;EKF Estimate&quot;</span><span class="p">)</span>
+
+<span class="n">rmse_ekf</span> <span class="o">=</span> <span class="n">rmse</span><span class="p">(</span><span class="n">ekf_m</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">states</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EKF RMSE: </span><span class="si">{</span><span class="n">rmse_ekf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EKF RMSE: 0.10306106181239276
+</pre></div>
+</div>
+<img alt="../../_images/ae552759416c420fccc1df3d9f5eed357039f807004a544164c023ac0b76f7b2.png" src="../../_images/ae552759416c420fccc1df3d9f5eed357039f807004a544164c023ac0b76f7b2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot covariances</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timeline</span><span class="p">,</span> <span class="n">ekf_P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">timeline</span><span class="p">,</span><span class="n">ekf_P</span><span class="p">[:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;P(1,1)&#39;</span><span class="p">,</span> <span class="s1">&#39;P(2,2)&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/17bc0a2f92ae9366f69f7e1c5c6492d918d909d811ad5b0d711376bc817f9108.png" src="../../_images/17bc0a2f92ae9366f69f7e1c5c6492d918d909d811ad5b0d711376bc817f9108.png" />
+</div>
+</div>
+</section>
+<section id="extended-smoother">
+<h2><span class="section-number">4.6.2. </span>Extended Smoother<a class="headerlink" href="#extended-smoother" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extended_smoother</span><span class="p">(</span><span class="n">ekf_m</span><span class="p">,</span> <span class="n">ekf_P</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>    
+    <span class="n">steps</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">ekf_m</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="n">rts_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">steps</span><span class="p">,</span> <span class="n">M</span><span class="p">))</span>
+    <span class="n">rts_P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">steps</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">))</span>
+    
+    <span class="n">m</span> <span class="o">=</span> <span class="n">ekf_m</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">ekf_P</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">rts_m</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span>
+    <span class="n">rts_P</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">filtered_m</span> <span class="o">=</span> <span class="n">ekf_m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">filtered_P</span> <span class="o">=</span> <span class="n">ekf_P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+        <span class="n">Df</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="n">dt</span><span class="p">],</span> 
+                      <span class="p">[</span><span class="o">-</span><span class="n">g</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">filtered_m</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mf">1.</span><span class="p">]])</span>
+        
+        <span class="n">mp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">filtered_m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">filtered_m</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
+                       <span class="n">filtered_m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">g</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">filtered_m</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+        <span class="n">Pp</span> <span class="o">=</span> <span class="n">Df</span> <span class="o">@</span> <span class="n">filtered_P</span> <span class="o">@</span> <span class="n">Df</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">Q</span>
+        
+        <span class="c1"># More efficient and stable way of computing Gk = filtered_P @ A.T @ linalg.inv(Pp)</span>
+        <span class="c1"># This also leverages the fact that Pp is known to be a positive definite matrix (assume_a=&quot;pos&quot;)</span>
+        <span class="n">Gk</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Pp</span><span class="p">,</span> <span class="n">Df</span> <span class="o">@</span> <span class="n">filtered_P</span><span class="p">,</span> <span class="n">assume_a</span><span class="o">=</span><span class="s2">&quot;pos&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> 
+
+        <span class="n">m</span> <span class="o">=</span> <span class="n">filtered_m</span> <span class="o">+</span> <span class="n">Gk</span> <span class="o">@</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">mp</span><span class="p">)</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">filtered_P</span> <span class="o">+</span> <span class="n">Gk</span> <span class="o">@</span> <span class="p">(</span><span class="n">P</span> <span class="o">-</span> <span class="n">Pp</span><span class="p">)</span> <span class="o">@</span> <span class="n">Gk</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="n">rts_m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="n">rts_P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span>
+
+    <span class="k">return</span> <span class="n">rts_m</span><span class="p">,</span> <span class="n">rts_P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rts_m</span><span class="p">,</span> <span class="n">rts_P</span> <span class="o">=</span> <span class="n">extended_smoother</span><span class="p">(</span><span class="n">ekf_m</span><span class="p">,</span> <span class="n">ekf_P</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">plot_pendulum</span><span class="p">(</span><span class="n">timeline</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="s2">&quot;Trajectory&quot;</span><span class="p">,</span> <span class="n">rts_m</span><span class="p">,</span> <span class="s2">&quot;Extended Smoother Estimate&quot;</span><span class="p">)</span>
+<span class="n">rmse_erts</span> <span class="o">=</span> <span class="n">rmse</span><span class="p">(</span><span class="n">rts_m</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">states</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;KF RMSE: </span><span class="si">{</span><span class="n">rmse_ekf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERTS RMSE: </span><span class="si">{</span><span class="n">rmse_erts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KF RMSE: 0.10306106181239276
+ERTS RMSE: 0.027612762479911554
+</pre></div>
+</div>
+<img alt="../../_images/1d7b24cb29b1d43ff959e77cf323d5a3b1854c4eef4a3db9599350a2e4684833.png" src="../../_images/1d7b24cb29b1d43ff959e77cf323d5a3b1854c4eef4a3db9599350a2e4684833.png" />
+</div>
+</div>
+</section>
+<section id="conclusions-on-extended-kalman-filters">
+<h2><span class="section-number">4.6.3. </span>Conclusions on Extended Kalman Filters<a class="headerlink" href="#conclusions-on-extended-kalman-filters" title="Permalink to this heading">#</a></h2>
+<p>The pros and cons of the EKF are:</p>
+<ul class="simple">
+<li><p>Pros:</p>
+<ul>
+<li><p>Relative simplicity, based on well-known linearization methods.</p></li>
+<li><p>Maintains the simple, elegant, and computationally efficient KF update equations.</p></li>
+<li><p>Good performance for such a simple method.</p></li>
+<li><p>Ability to treat nonlinear process and observation models.</p></li>
+<li><p>Ability to treat both additive and more general nonlinear Gaussian noise.</p></li>
+</ul>
+</li>
+<li><p>Cons:</p>
+<ul>
+<li><p>Performance can suffer in presence of strong nonlinearity because of the local validity of the linear approximation (valid for small perturbations around the linear term).</p></li>
+<li><p>Cannot deal with non-Gaussian noise, such as discrete-valued random variables.</p></li>
+<li><p>Requires differentiable process and measurement operators and evaluation of Jacobian matrices, which might be problematic in very high dimensions.</p></li>
+</ul>
+</li>
+</ul>
+<p>In spite of this, the EKF remains a solid filter and remains the basis of most GPS and navigation systems.</p>
+</section>
+<section id="references">
+<h2><span class="section-number">4.6.4. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a name="LSZ"></a> K. Law, A Stuart, K. Zygalakis. <em>Data Assimilation. A Mathematical Introduction.</em> Springer. 2015.</p></li>
+<li><p><a name="asch1"></a> M. Asch, M. Bocquet, M. Nodet. <em>Data Assimilation: Methods, Algorithms and Applications.</em> SIAM. 2016.</p></li>
+<li><p><a name="asch2"></a> M. Asch. <em>A Toobox for Digital Twins. From Model-Based to Data-Driven.</em> SIAM. 2022</p></li>
+<li><p><a name="sarkka"></a>  S. Sarkka, L. Svensson. <em>Bayesian Filtering and Smoothing,</em> 2nd ed., Cambridge University Press. 2023.</p></li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -385,7 +708,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4.1. </span>EX 1</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>Example 1 - tracking a random sinusoidal signal</p>
       </div>
     </a>
     <a class="right-next"
@@ -403,6 +726,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-kalman-filter-ekf">4.6.1. Extended Kalman Filter (EKF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-smoother">4.6.2. Extended Smoother</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions-on-extended-kalman-filters">4.6.3. Conclusions on Extended Kalman Filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">4.6.4. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

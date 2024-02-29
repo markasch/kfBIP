@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>4.1. EX 1 &#8212; kfBIP</title>
+    <title>4.5. Example 1 - tracking a random sinusoidal signal &#8212; kfBIP</title>
   
   
   
@@ -63,11 +63,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/EKF/022EKFExample1';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.2. EX 2" href="022EKFExample2.html" />
-    <link rel="prev" title="4. Title 4" href="../../theory/022NlinKF.html" />
+    <link rel="next" title="4.6. Example 2 - tracking a noisy pendulum" href="022EKFExample2.html" />
+    <link rel="prev" title="4. Nonlinear Kalman Filters" href="../../theory/022NlinKF.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,14 +170,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Kalman Filters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/021BasicKF.html">3. Title 3</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample1.html">3.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample2.html">3.2. EX2</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/021BasicKF.html">3. Kalman Filters</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample1.html">3.5. Example 1 - estimating a constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample2.html">3.6. Example 2 - scalar, Gaussian random walk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample3.html">3.7. Example 3 - constant-velocity 1D position tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../KF/021KFExample4.html">3.8. Example 4 - constant-velocity 2D motion tracking</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../theory/022NlinKF.html">4. Title 4</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="022EKFExample2.html">4.2. EX 2</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../theory/022NlinKF.html">4. Nonlinear Kalman Filters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.5. Example 1 - tracking a random sinusoidal signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="022EKFExample2.html">4.6. Example 2 - tracking a noisy pendulum</a></li>
 </ul>
 </li>
 </ul>
@@ -249,7 +253,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/examples/EKF/022EKFExample1.md" target="_blank"
+      <li><a href="../../_sources/examples/EKF/022EKFExample1.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -259,7 +263,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -331,7 +335,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>EX 1</h1>
+    <h1>Example 1 - tracking a random sinusoidal signal</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -345,8 +349,69 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ex-1">
-<h1><span class="section-number">4.1. </span>EX 1<a class="headerlink" href="#ex-1" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="example-1-tracking-a-random-sinusoidal-signal">
+<h1><span class="section-number">4.5. </span>Example 1 - tracking a random sinusoidal signal<a class="headerlink" href="#example-1-tracking-a-random-sinusoidal-signal" title="Permalink to this heading">#</a></h1>
+<p>Before introducing more general nonlinear dyanmic systems (see the following examples), let us consider a simple case of tracking a random sine signal whose angular velocity and amplitude vary, randomly, over time. We express the nonlinearity through the measurement model, though this could be done with the dynamic model, as in the examples below.</p>
+<p>Let the state vector be</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \mathbf{x}_k = \left[\begin{array}{c}
+		\theta_k\\
+		\omega_k \\
+        a_k
+	\end{array}\right],
+\end{split}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(\theta\)</span> is the angle, <span class="math notranslate nohighlight">\(\omega\)</span> the angular velocity and <span class="math notranslate nohighlight">\(a\)</span> the amplitude of the sine function. The model is then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{\mathrm{d} \theta}{\mathrm{d}t} &amp;=  \omega \\
+\frac{\mathrm{d} \omega}{\mathrm{d}t} &amp;=  w_{\omega}(t) \\
+\frac{\mathrm{d} a}{\mathrm{d}t} &amp;=  w_a(t) 
+\end{align}
+\end{split}\]</div>
+<p>In matrix form, we have</p>
+<div class="math notranslate nohighlight">
+\[ 
+  \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = F \mathbf{x}(t) + L \mathbf{w}(t) , \quad \mathbf{x}(0) = \mathbf{x}_0,
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+F = \begin{bmatrix} 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 0 \\  0 &amp; 0 &amp; 0 \end{bmatrix}, \quad
+L =  \begin{bmatrix} 0 &amp; 0\\ 1 &amp; 0 \\ 0 &amp; 1  \end{bmatrix}, \quad
+\mathbf{w}(t) =  \begin{bmatrix} w_\omega (t)\\ w_a(t) \end{bmatrix},
+\end{split}\]</div>
+<p>and the power spectral density of the white noise process <span class="math notranslate nohighlight">\(\mathbf{w}(t)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Q^c = \begin{bmatrix} q_1 &amp; 1\\ 0 &amp; q_2 \end{bmatrix}.
+\end{split}\]</div>
+<p>Using the matrix exponential formulas (see <span class="xref myst">KF-tutorial</span>), we get the discrete system</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+ \mathbf{x}_{k+1 } &amp;= A_k  \mathbf{x}_{k} + \mathbf{q}_{k}, \\
+ y_k &amp;= a_k \sin \theta_k + r_k
+\end{align}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(r_k \sim \mathcal{N}(0, \sigma_r)\)</span> is univariate Gaussian noise,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_k = \begin{bmatrix} 0 &amp; \Delta t &amp; 0\\ 0 &amp; 1 &amp; 0 \\  0 &amp; 0 &amp; 1 \end{bmatrix},
+\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\(\mathbf{q}_{k} \sim \mathcal{N}(0, Q_k)\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ Q_k = \begin{bmatrix} q_1 \Delta t^3 / 3   &amp; q_1 \Delta t^2 / 2  &amp; 0 \\
+        q_1 \Delta t^2 / 2  &amp;  q_1 \Delta t  &amp; 0 \\
+        0 &amp;   0 &amp;  q_2 \Delta t \end{bmatrix}.
+\end{split}\]</div>
+<p>Finally, the Jacobian of <span class="math notranslate nohighlight">\(h(\mathbf{x}_{k}) = a_k \sin \theta_k \)</span> is easily seen to be</p>
+<div class="math notranslate nohighlight">
+\[
+  Dh_k = [ a_k \cos \theta_k \quad 0 \quad \sin \theta_k ]
+\]</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -385,7 +450,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Title 4</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Nonlinear Kalman Filters</p>
       </div>
     </a>
     <a class="right-next"
@@ -393,7 +458,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4.2. </span>EX 2</p>
+        <p class="prev-next-title"><span class="section-number">4.6. </span>Example 2 - tracking a noisy pendulum</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
