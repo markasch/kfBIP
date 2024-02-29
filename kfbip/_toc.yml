@@ -3,7 +3,7 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Bayes
+  - caption: Bayes Theory
     numbered: true
     chapters:
     - file: theory/011BayesTheory

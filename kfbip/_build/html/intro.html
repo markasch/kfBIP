@@ -160,7 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayes</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayes Theory</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="theory/011BayesTheory.html">1. Bayes’ Theorem</a></li>
 <li class="toctree-l1"><a class="reference internal" href="theory/012BayesFilters.html">2. Bayesian Filters</a></li>
@@ -360,10 +360,12 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-kfbip">
 <h1>Welcome to kfBIP<a class="headerlink" href="#welcome-to-kfbip" title="Permalink to this heading">#</a></h1>
 <p>This book contains a presentation of Kalman filters, from basics to ensemble filters. A large number of examples are provided in the form of jupyter notebooks. Then the notion of Bayesian inverse problems (BIP) is introduced.  Finally, there is a detailed presentation of the use of the ensemble Kalman filter as a basis for the solution of inverse problems. This is denoted EKI, or ensemble Kalman inversion, following the magnificent work of Andrew Stuart and his collaborators.</p>
+<p>This book is based upon a number of sources. The original Bayesian formulation for inverse problems <span id="id1">[<a class="reference internal" href="#id13" title="Masoumeh Dashti and Andrew M. Stuart. The Bayesian Approach to Inverse Problems. In Roger Ghanem, David Higdon, and Houman Owhadi, editors, Handbook of Uncertainty Quantification, pages 1–118. Springer International Publishing, Cham, 2015. URL: https://link.springer.com/10.1007/978-3-319-11259-6_7-1 (visited on 2024-01-08), doi:10.1007/978-3-319-11259-6_7-1.">4</a>]</span> was the basis for the later ensemble Kalman inversion, presented in a series of papers <span id="id2">[<a class="reference internal" href="#id14" title="Marco A Iglesias, Kody J H Law, and Andrew M Stuart. Ensemble Kalman methods for inverse problems. Inverse Problems, 29(4):045001, April 2013. URL: https://iopscience.iop.org/article/10.1088/0266-5611/29/4/045001 (visited on 2024-01-03), doi:10.1088/0266-5611/29/4/045001.">6</a>]</span>, <span id="id3">[<a class="reference internal" href="#id15" title="Edoardo Calvello, Sebastian Reich, and Andrew M. Stuart. Ensemble Kalman Methods: A Mean Field Perspective. September 2022. arXiv:2209.11371 [cs, math]. URL: http://arxiv.org/abs/2209.11371 (visited on 2024-01-03).">3</a>]</span>, <span id="id4">[<a class="reference internal" href="#id12" title="Daniel Zhengyu Huang, Jiaoyang Huang, Sebastian Reich, and Andrew M. Stuart. Efficient Derivative-free Bayesian Inference for Large-Scale Inverse Problems. August 2022. arXiv:2204.04386 [cs, math]. URL: http://arxiv.org/abs/2204.04386 (visited on 2024-01-03).">5</a>]</span>.</p>
+<p>In <span id="id5">[<a class="reference internal" href="#id9" title="Mark Asch, Marc Bocquet, and Maëlle Nodet. Data Assimilation: Methods, Algorithms, and Applications. Society for Industrial and Applied Mathematics, Philadelphia, PA, December 2016. ISBN 978-1-61197-453-9 978-1-61197-454-6. URL: http://epubs.siam.org/doi/book/10.1137/1.9781611974546 (visited on 2024-01-03), doi:10.1137/1.9781611974546.">2</a>]</span> and <span id="id6">[<a class="reference internal" href="#id11" title="Kody Law, Andrew Stuart, and Konstantinos Zygalakis. Data Assimilation: A Mathematical Introduction. Volume 62 of Texts in Applied Mathematics. Springer International Publishing, Cham, 2015. ISBN 978-3-319-20324-9 978-3-319-20325-6. URL: https://link.springer.com/10.1007/978-3-319-20325-6 (visited on 2024-02-29), doi:10.1007/978-3-319-20325-6.">7</a>]</span> the reader can find detailed presentations of Kalman filters approaches for data assimilation. In  <span id="id7">[<a class="reference internal" href="#id10" title="Mark Asch. A Toolbox for Digital Twins: From Model-Based to Data-Driven. Society for Industrial and Applied Mathematics, Philadelphia, PA, January 2022. ISBN 978-1-61197-696-0 978-1-61197-697-7. URL: https://epubs.siam.org/doi/book/10.1137/1.9781611976977 (visited on 2024-01-03), doi:10.1137/1.9781611976977.">1</a>]</span> there are basic explanations of uncertainty quantification, inverse problems and their use for digital twins.</p>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayes</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayes Theory</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="theory/011BayesTheory.html">1. Bayes’ Theorem</a></li>
 <li class="toctree-l1"><a class="reference internal" href="theory/012BayesFilters.html">2. Bayesian Filters</a></li>
@@ -392,13 +394,37 @@ document.write(`
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
-<p>Normally would put the following:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"> <span class="pre">```{bibliography}</span> <span class="pre">references.bib</span></code>
-<code class="docutils literal notranslate"><span class="pre">:style:</span> <span class="pre">plain</span></code>
-<code class="docutils literal notranslate"><span class="pre">```</span></code></p>
-</div></blockquote>
-<p>but it messes up the page setting on the mac!</p>
+<div class="docutils container" id="id8">
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">1</a><span class="fn-bracket">]</span></span>
+<p>Mark Asch. <em>A Toolbox for Digital Twins: From Model-Based to Data-Driven</em>. Society for Industrial and Applied Mathematics, Philadelphia, PA, January 2022. ISBN 978-1-61197-696-0 978-1-61197-697-7. URL: <a class="reference external" href="https://epubs.siam.org/doi/book/10.1137/1.9781611976977">https://epubs.siam.org/doi/book/10.1137/1.9781611976977</a> (visited on 2024-01-03), <a class="reference external" href="https://doi.org/10.1137/1.9781611976977">doi:10.1137/1.9781611976977</a>.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">2</a><span class="fn-bracket">]</span></span>
+<p>Mark Asch, Marc Bocquet, and Maëlle Nodet. <em>Data Assimilation: Methods, Algorithms, and Applications</em>. Society for Industrial and Applied Mathematics, Philadelphia, PA, December 2016. ISBN 978-1-61197-453-9 978-1-61197-454-6. URL: <a class="reference external" href="http://epubs.siam.org/doi/book/10.1137/1.9781611974546">http://epubs.siam.org/doi/book/10.1137/1.9781611974546</a> (visited on 2024-01-03), <a class="reference external" href="https://doi.org/10.1137/1.9781611974546">doi:10.1137/1.9781611974546</a>.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Edoardo Calvello, Sebastian Reich, and Andrew M. Stuart. Ensemble Kalman Methods: A Mean Field Perspective. September 2022. arXiv:2209.11371 [cs, math]. URL: <a class="reference external" href="http://arxiv.org/abs/2209.11371">http://arxiv.org/abs/2209.11371</a> (visited on 2024-01-03).</p>
+</div>
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">4</a><span class="fn-bracket">]</span></span>
+<p>Masoumeh Dashti and Andrew M. Stuart. The Bayesian Approach to Inverse Problems. In Roger Ghanem, David Higdon, and Houman Owhadi, editors, <em>Handbook of Uncertainty Quantification</em>, pages 1–118. Springer International Publishing, Cham, 2015. URL: <a class="reference external" href="https://link.springer.com/10.1007/978-3-319-11259-6_7-1">https://link.springer.com/10.1007/978-3-319-11259-6_7-1</a> (visited on 2024-01-08), <a class="reference external" href="https://doi.org/10.1007/978-3-319-11259-6_7-1">doi:10.1007/978-3-319-11259-6_7-1</a>.</p>
+</div>
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">5</a><span class="fn-bracket">]</span></span>
+<p>Daniel Zhengyu Huang, Jiaoyang Huang, Sebastian Reich, and Andrew M. Stuart. Efficient Derivative-free Bayesian Inference for Large-Scale Inverse Problems. August 2022. arXiv:2204.04386 [cs, math]. URL: <a class="reference external" href="http://arxiv.org/abs/2204.04386">http://arxiv.org/abs/2204.04386</a> (visited on 2024-01-03).</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">6</a><span class="fn-bracket">]</span></span>
+<p>Marco A Iglesias, Kody J H Law, and Andrew M Stuart. Ensemble Kalman methods for inverse problems. <em>Inverse Problems</em>, 29(4):045001, April 2013. URL: <a class="reference external" href="https://iopscience.iop.org/article/10.1088/0266-5611/29/4/045001">https://iopscience.iop.org/article/10.1088/0266-5611/29/4/045001</a> (visited on 2024-01-03), <a class="reference external" href="https://doi.org/10.1088/0266-5611/29/4/045001">doi:10.1088/0266-5611/29/4/045001</a>.</p>
+</div>
+<div class="citation" id="id11" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">7</a><span class="fn-bracket">]</span></span>
+<p>Kody Law, Andrew Stuart, and Konstantinos Zygalakis. <em>Data Assimilation: A Mathematical Introduction</em>. Volume 62 of Texts in Applied Mathematics. Springer International Publishing, Cham, 2015. ISBN 978-3-319-20324-9 978-3-319-20325-6. URL: <a class="reference external" href="https://link.springer.com/10.1007/978-3-319-20325-6">https://link.springer.com/10.1007/978-3-319-20325-6</a> (visited on 2024-02-29), <a class="reference external" href="https://doi.org/10.1007/978-3-319-20325-6">doi:10.1007/978-3-319-20325-6</a>.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 
