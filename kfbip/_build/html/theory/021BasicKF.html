@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Title 3 &#8212; kfBIP</title>
+    <title>3. Kalman Filters &#8212; kfBIP</title>
   
   
   
@@ -63,10 +63,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'theory/021BasicKF';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.1. EX 1" href="../examples/KF/021KFExample1.html" />
+    <link rel="next" title="3.5. Example 1 - estimating a constant" href="../examples/KF/021KFExample1.html" />
     <link rel="prev" title="2. Bayesian Filters" href="012BayesFilters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -161,16 +163,16 @@ const thebe_selector_output = ".output, .cell_output"
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayes</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayes Theory</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="011BayesTheory.html">1. Bayes’ Theorem</a></li>
 <li class="toctree-l1"><a class="reference internal" href="012BayesFilters.html">2. Bayesian Filters</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Kalman Filters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">3. Title 3</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample1.html">3.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample2.html">3.2. EX2</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">3. Kalman Filters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample1.html">3.5. Example 1 - estimating a constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/KF/021KFExample2.html">3.6. EX2</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="022NlinKF.html">4. Title 4</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -320,7 +322,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -331,11 +335,27 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Title 3</h1>
+    <h1>Kalman Filters</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">3.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kalman-filter-problem-general-formulation">3.2. Kalman filter problem - General formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-forecast">3.2.1. Prediction/Forecast</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correction-analysis">3.2.2. Correction/Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-over-time">3.2.3. Loop over time</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-formulation">3.3. State-space formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passage-from-continuous-to-discrete-for-random-dynamic-systems">3.4. Passage from Continuous to Discrete for Random Dynamic Systems</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -345,8 +365,199 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="title-3">
-<h1><span class="section-number">3. </span>Title 3<a class="headerlink" href="#title-3" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="kalman-filters">
+<h1><span class="section-number">3. </span>Kalman Filters<a class="headerlink" href="#kalman-filters" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2><span class="section-number">3.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>The Kalman filter can be used for</p>
+<ul class="simple">
+<li><p>state estimation—this is the direct filtering (or smoothing) problem</p></li>
+<li><p>parameter estimation—this is the inverse problem based on filtering with a pseudo-time</p></li>
+</ul>
+<p>Kalman filters are linear (and Gaussian) or nonlinear. Among the nonlinear approaches, the Ensemble Kalman filter (EnKF) provides a <em>derivative-free</em> approach to the solution of inverse problems.</p>
+</section>
+<section id="kalman-filter-problem-general-formulation">
+<h2><span class="section-number">3.2. </span>Kalman filter problem - General formulation<a class="headerlink" href="#kalman-filter-problem-general-formulation" title="Permalink to this heading">#</a></h2>
+<p>We present a very general formulation that will later be convenient for joint state and parameter estimation problems.</p>
+<p>We consider a discrete-time dynamical system with noisy state transitions and noisy observations.</p>
+<ul>
+<li><p>Dynamics:</p>
+<div class="math notranslate nohighlight">
+\[v_{j+1} = \Psi(v_j) + \xi_j, \quad j \in \mathbb{Z}^+\]</div>
+</li>
+<li><p>Observations:</p>
+<div class="math notranslate nohighlight">
+\[y_{j+1} = h (v_{j+1}) + \eta_{j+1}, \quad j \in \mathbb{Z}^+\]</div>
+</li>
+<li><p>Probability (densities):</p>
+<div class="math notranslate nohighlight">
+\[v_0 \sim \mathcal{N}(m_0,C_0), \quad \xi_j \sim \mathcal{N}(0,\Sigma), \quad \eta_j \sim \mathcal{N}(0,\Gamma)\]</div>
+</li>
+<li><p>Probability (independence):</p>
+<div class="math notranslate nohighlight">
+\[v_0 \perp {\xi_j} \perp {\eta_j}\]</div>
+</li>
+<li><p>Operators:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6d066c87-b5a6-4477-8a01-e3b9558a946f">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-6d066c87-b5a6-4477-8a01-e3b9558a946f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+	  \Psi \colon \mathcal{H}_s &amp;\mapsto \mathcal{H}_s, \\
+	  h  \colon \mathcal{H}_s &amp;\mapsto \mathcal{H}_o,
+	 \end{eqnarray}\]</div>
+<p>where  <span class="math notranslate nohighlight">\(v_j \in \mathcal{H}_s,\)</span>  <span class="math notranslate nohighlight">\(y_j \in \mathcal{H}_o\)</span> and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> is a finite-dimensional Hilbert space.</p>
+</li>
+</ul>
+<p><strong>Filtering problem</strong>: estimate (optimally) the state <span class="math notranslate nohighlight">\(v_j\)</span> of the dynamical system at time <span class="math notranslate nohighlight">\(j,\)</span> given the data <span class="math notranslate nohighlight">\(Y_j = \{y_i\}_{i=1}^{j}\)</span> up to time <span class="math notranslate nohighlight">\(j.\)</span> This is achieved by using a two-step <em>predictor-corrector</em> method. We will use the more general notation of <span id="id1">[<a class="reference internal" href="../intro.html#id12" title="Kody Law, Andrew Stuart, and Konstantinos Zygalakis. Data Assimilation: A Mathematical Introduction. Volume 62 of Texts in Applied Mathematics. Springer International Publishing, Cham, 2015. ISBN 978-3-319-20324-9 978-3-319-20325-6. URL: https://link.springer.com/10.1007/978-3-319-20325-6 (visited on 2024-02-29), doi:10.1007/978-3-319-20325-6.">7</a>]</span> instead of the usual, classical state-space formulation that is used in <span id="id2">[<a class="reference internal" href="../intro.html#id9" title="Mark Asch, Marc Bocquet, and Maëlle Nodet. Data Assimilation: Methods, Algorithms, and Applications. Society for Industrial and Applied Mathematics, Philadelphia, PA, December 2016. ISBN 978-1-61197-453-9 978-1-61197-454-6. URL: http://epubs.siam.org/doi/book/10.1137/1.9781611974546 (visited on 2024-01-03), doi:10.1137/1.9781611974546.">2</a>]</span> and <span id="id3">[<a class="reference internal" href="../intro.html#id10" title="Mark Asch. A Toolbox for Digital Twins: From Model-Based to Data-Driven. Society for Industrial and Applied Mathematics, Philadelphia, PA, January 2022. ISBN 978-1-61197-696-0 978-1-61197-697-7. URL: https://epubs.siam.org/doi/book/10.1137/1.9781611976977 (visited on 2024-01-03), doi:10.1137/1.9781611976977.">1</a>]</span> .</p>
+<p>The objective is to update the filtering distribution  <span class="math notranslate nohighlight">\(\mathbb{P}(v_j \vert Y_j),\)</span> from time <span class="math notranslate nohighlight">\(j\)</span> to time <span class="math notranslate nohighlight">\(j+1,\)</span>  in the linear, Gaussian case, where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Psi\)</span> and <span class="math notranslate nohighlight">\(h\)</span> are linear maps</p></li>
+<li><p>all distributions are Gaussian.</p></li>
+</ul>
+<p>Suppose</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c3eeea66-3a7c-4c4a-8478-91c2ac521624">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-c3eeea66-3a7c-4c4a-8478-91c2ac521624" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+   \Psi(v) &amp;= Mv \\
+   h(v) &amp;= Hv,
+\end{eqnarray}\]</div>
+<p>where the matrices <span class="math notranslate nohighlight">\(M \in \mathbb{R}^{n \times n},\)</span> <span class="math notranslate nohighlight">\(H \in \mathbb{R}^{m \times n},\)</span> with <span class="math notranslate nohighlight">\(m \le n\)</span>  and <span class="math notranslate nohighlight">\(\mathrm{rank}(H)=m.\)</span></p>
+<ol class="arabic simple">
+<li><p>Let <span class="math notranslate nohighlight">\((m_j, C_j)\)</span> denote the mean and covariance of <span class="math notranslate nohighlight">\(v_j \vert Y_j\)</span>  and note that these entirely characterize the random variable since it is Gaussian.</p></li>
+<li><p>Let  <span class="math notranslate nohighlight">\((\hat{m}_{j+1}, \hat{C}_{j+1})\)</span> denote the mean and covariance of <span class="math notranslate nohighlight">\(v_{j+1} \vert Y_j\)</span>  and note that these entirely characterize the random variable since it is Gaussian.</p></li>
+<li><p>Derive the map <span class="math notranslate nohighlight">\((m_j, C_j) \mapsto (m_{j+1}, C_{j+1})\)</span> using the previous step.</p></li>
+</ol>
+<section id="prediction-forecast">
+<h3><span class="section-number">3.2.1. </span>Prediction/Forecast<a class="headerlink" href="#prediction-forecast" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P}(v_n \vert y_1, \ldots, y_n) \mapsto \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_n) \]</div>
+<ul>
+<li><p>P0: initialize <span class="math notranslate nohighlight">\((m_0, C_0)\)</span> and compute <span class="math notranslate nohighlight">\(v_0\)</span></p></li>
+<li><p>P1: predict the state, measurement</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8c9b535f-0f62-4486-a48a-8f516f71d621">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-8c9b535f-0f62-4486-a48a-8f516f71d621" title="Permalink to this equation">#</a></span>\[\begin{align}
+     v_{j+1} &amp;= M v_j + \xi_j \\
+     y_{j+1} &amp;= H v_{j+1} + \eta_{j+1}
+     \end{align}\]</div>
+</li>
+<li><p>P2: predict the mean and covariance</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f9ab32f5-e00b-4ae9-a5f5-d999e1a786dc">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-f9ab32f5-e00b-4ae9-a5f5-d999e1a786dc" title="Permalink to this equation">#</a></span>\[\begin{align}
+     \hat{m}_{j+1}  &amp;= M m_j \\
+     \hat{C}_{j+1}  &amp;= M C_j M^{\mathrm{T}} + \Sigma
+     \end{align}\]</div>
+</li>
+</ul>
+</section>
+<section id="correction-analysis">
+<h3><span class="section-number">3.2.2. </span>Correction/Analysis<a class="headerlink" href="#correction-analysis" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_n) \mapsto \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_{n+1}) \]</div>
+<ul>
+<li><p>C1: compute the innovation</p>
+<div class="math notranslate nohighlight">
+\[ d_{j+1} = y_{j+1} - H \hat{m}_{j+1} \]</div>
+</li>
+<li><p>C2: compute the measurement covariance</p>
+<div class="math notranslate nohighlight">
+\[ S_{j+1} = H \hat{C}_{j+1}  H^{\mathrm{T}} + \Gamma \]</div>
+</li>
+<li><p>C3: compute the (optimal) Kalman gain</p>
+<div class="math notranslate nohighlight">
+\[ K_{j+1} = \hat{C}_{j+1} H^{\mathrm{T}}  S_{j+1}^{-1} \]</div>
+</li>
+<li><p>C4: update/correct the mean and covariance</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1538ed53-26cd-45cf-a6de-7eda72119ed4">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-1538ed53-26cd-45cf-a6de-7eda72119ed4" title="Permalink to this equation">#</a></span>\[\begin{align}
+     {m}_{j+1}  &amp;= \hat{m}_{j+1} + K_{j+1} d_{j+1}, \\
+     {C}_{j+1}  &amp;= \hat{C}_{j+1} - K_{j+1}  S_{j+1}  K_{j+1}^{\mathrm{T}}.
+     \end{align}\]</div>
+</li>
+</ul>
+</section>
+<section id="loop-over-time">
+<h3><span class="section-number">3.2.3. </span>Loop over time<a class="headerlink" href="#loop-over-time" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>set <span class="math notranslate nohighlight">\(j = j+1\)</span></p></li>
+<li><p>go to step P1</p></li>
+</ul>
+</section>
+</section>
+<section id="state-space-formulation">
+<h2><span class="section-number">3.3. </span>State-space formulation<a class="headerlink" href="#state-space-formulation" title="Permalink to this heading">#</a></h2>
+<p>In classical (linear) filter theory, a state space formulation is usually used.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-40a31458-b19d-4647-9b06-cb7bf155b49e">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-40a31458-b19d-4647-9b06-cb7bf155b49e" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+ &amp;&amp; x_{k+1}  = F x_k + B u_k + w_k \\
+ &amp;&amp; y_{k+1}  = H x_k + v_k,
+\end{eqnarray}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u\)</span> is a control input, and <span class="math notranslate nohighlight">\(w_k \sim \mathcal{N}(0,Q),\)</span> <span class="math notranslate nohighlight">\(v_k \sim \mathcal{N}(0,R).\)</span> Moreover, <span class="math notranslate nohighlight">\(A\)</span> is the dynamics and <span class="math notranslate nohighlight">\(H\)</span> the observation operator.</p>
+<p>The 2-step filter:</p>
+<p><strong>Initialization</strong></p>
+<div class="math notranslate nohighlight">
+\[ x_0, \quad P_0 \]</div>
+<p><strong>1. Prediction</strong></p>
+<div class="amsmath math notranslate nohighlight" id="equation-fb6123c3-e1d3-4cee-9a39-a430832ac408">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-fb6123c3-e1d3-4cee-9a39-a430832ac408" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+ &amp;&amp; x_{k+1}^- = F x_k \\
+ &amp;&amp; P_{k+1}^- = F P_k F^{\mathrm{T}} + Q 
+\end{eqnarray}\]</div>
+<p><strong>2. Correction</strong></p>
+<div class="amsmath math notranslate nohighlight" id="equation-e8aae821-4bff-4d91-89f6-44c4ed974e45">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-e8aae821-4bff-4d91-89f6-44c4ed974e45" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+  K_{k+1} &amp;&amp; = P_{k+1}^{-} H^{\mathrm{T}} ( H  P_{k+1}^{-} H^{\mathrm{T}} + R )^{-1}
+               \quad (= P_{k+1}^- H^{\mathrm{T}} S^{-1})\\
+  x_{k+1} &amp;&amp;= x_{k+1}^{-} + K_{k+1} (y_{k+1} - H x_{k+1}^- ) \\
+  P_{k+1} &amp;&amp;= (I -  K_{k+1} H ) P_{k+1}^- 
+              \quad (= P_{k+1}^- - K_{k+1} S K^{\mathrm{T}}_{k+1})
+\end{eqnarray}\]</div>
+<p><strong>Loop</strong></p>
+<p>Set <span class="math notranslate nohighlight">\(k = k+1\)</span> and go to step 1.</p>
+<div class="proof remark admonition" id="remark-0">
+<p class="admonition-title"><span>Remark </span> (Notation)</p>
+<section class="remark-content" id="proof-content">
+<p>In some cases, the superscripts <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> are used to denote the forecast/prediction, and analysis/correction variables, respectively. We avoid this, for clarity of notation.</p>
+</section>
+</div><div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>In some cases, the superscripts <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> are used to denote the forecast/prediction, and analysis/correction variables, respectively. We avoid this, for clarity of notation.</p>
+</div>
+</section>
+<section id="passage-from-continuous-to-discrete-for-random-dynamic-systems">
+<h2><span class="section-number">3.4. </span>Passage from Continuous to Discrete for Random Dynamic Systems<a class="headerlink" href="#passage-from-continuous-to-discrete-for-random-dynamic-systems" title="Permalink to this heading">#</a></h2>
+<p>Most often, in the use of Kalman filtering, we deal with a continuous dynamic system that is modelled by a system of ODEs, with some random process noise. The passage from the continuous to a discrete-time formulation, which is needed for the KF, requires some attention. Following {cite}Sarkka2023, we will derive the associated discretization of the process matrix and the process noise covariance matrix.</p>
+<p>Suppose we have a linear, time invariant (LTI) system of ODEs with an additive random noise term (this is the engineering approach that avoids the use of SDEs and Itô calculus—see {cite}Asch2022 )</p>
+<div class="math notranslate nohighlight">
+\[ 
+  \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = F \mathbf{x}(t) + L \mathbf{w}(t) , \quad \mathbf{x}(0) = \mathbf{x}_0,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{w}(t)\)</span> is a white, Gaussian noise process with expectation and covariance</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4838f483-e4cf-49e3-80b0-1e2fb4cfeeee">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-4838f483-e4cf-49e3-80b0-1e2fb4cfeeee" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp; \mathrm{E}[\mathbf{w}(t)] = 0, \\
+&amp; \mathrm{Cov}[\mathbf{w}(\tau_1)\mathbf{w}(\tau_2)] = \delta(\tau_1 - \tau_2) Q^c
+\end{align}\]</div>
+<p>with <span class="math notranslate nohighlight">\(Q^c\)</span> the spectral density matrix of the white noise process, which is the continuous-time analogue of a covariance matrix, and in the scalar case is just the noise variance. Usually</p>
+<div class="math notranslate nohighlight">
+\[
+  Q^c = \mathrm{diag}(q^c_1, \ldots, q^c_n),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(q^c_1, \ldots, q^c_n\)</span> are the spectral densities of <span class="math notranslate nohighlight">\(w_1(t), \ldots, w_n(t),\)</span> the components of <span class="math notranslate nohighlight">\(\mathbf{w}(t).\)</span></p>
+<p>We now proceed to convert this continous LTI system into its discrete counterpart, needed for the KF algorithm,</p>
+<div class="math notranslate nohighlight">
+\[
+ \mathbf{x}_{k+1 } = A_k  \mathbf{x}_{k} + \mathbf{q}_{k}, 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A_k\)</span> is the discretized process/dynamics transition matrix, and <span class="math notranslate nohighlight">\(\mathbf{q}_{k} \sim \mathcal{N} (0, Q)\)</span> is the Gaussian process noise.</p>
+<p>To obtain expressions for <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(Q,\)</span> we need to solve the random ODE system. Doing this, we can show that</p>
+<div class="math notranslate nohighlight">
+\[
+  A_k = \exp (F \Delta t_{k}) = \sum_{n=0}^{\infty} \frac{(F \Delta t_{k})^n}{n !}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+  Q_k = \int_0^{\Delta t_{k}}  \exp (F s) L Q^c L^{\mathrm{T}} \exp (F s)^{\mathrm{T}} \mathrm{d}s.
+\]</div>
+<p>Usually, <span class="math notranslate nohighlight">\(F\)</span> is nilpotent to some order, so the computation of the matrix exponential is relatively easy to do. This will be illustrated in the examples.</p>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -395,7 +606,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.1. </span>EX 1</p>
+        <p class="prev-next-title"><span class="section-number">3.5. </span>Example 1 - estimating a constant</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -405,6 +616,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">3.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kalman-filter-problem-general-formulation">3.2. Kalman filter problem - General formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-forecast">3.2.1. Prediction/Forecast</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correction-analysis">3.2.2. Correction/Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-over-time">3.2.3. Loop over time</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-formulation">3.3. State-space formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passage-from-continuous-to-discrete-for-random-dynamic-systems">3.4. Passage from Continuous to Discrete for Random Dynamic Systems</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

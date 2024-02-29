@@ -2,7 +2,7 @@
 
 Filters can be expressed in a Bayesian form.
 
-:::{important} Bayesian_and_Kalman
+:::{important}
 Kalman filters are a special case of the more general Bayesian filter formulation
 :::
 
