@@ -35,3 +35,26 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  
+# MyST extensions
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - amsmath
+    - dollarmath
+    - colon_fence
+    - html_image
+
+
+# add license button and text to footnote
+sphinx:
+    config:
+      html_show_copyright: false
+      html_theme_options:
+         extra_footer: |
+           <p>
+           <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>
+           </p>
+    extra_extensions:
+      - sphinx_proof

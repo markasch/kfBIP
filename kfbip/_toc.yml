@@ -1,9 +1,36 @@
 # Table of contents
 # Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+parts:
+  - caption: Bayes
+    numbered: true
+    chapters:
+    - file: theory/011BayesTheory
+    - file: theory/012BayesFilters
+  - caption: Kalman Filters
+    numbered: true
+    chapters:
+    - file: theory/021BasicKF
+      sections:
+       - file: examples/KF/021KFExample1
+       - file: examples/KF/021KFExample2
+    - file: theory/022NlinKF
+      sections:
+       - file: examples/EKF/022EKFExample1
+       - file: examples/EKF/022EKFExample2
+  - caption: Ensemble Kalman Filters
+    numbered: true
+    chapters:
+    - file: theory/031EnKFTheory
+      sections:
+       - file: examples/EnKF/032EnKFExample1
+       - file: examples/EnKF/032EnKFExample2
+  - caption: Bayesian and Ensemble Kalman Inversion
+    numbered: true
+    chapters:
+    - file: theory/041BIPTheory
+    - file: theory/042EKITheory
+      sections:
+      - file: examples/EKI/042EKIExample1
+      - file: examples/EKI/042EKIExample2
