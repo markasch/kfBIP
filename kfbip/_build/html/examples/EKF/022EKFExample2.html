@@ -7,8 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>4.6. Example 2 - tracking a noisy pendulum &#8212; kfBIP</title>
   
   
@@ -68,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/EKF/022EKFExample2';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5. Title 5" href="../../theory/031EnKFTheory.html" />
+    <link rel="next" title="5. ENSEMBLE Kalman Filter" href="../../theory/031EnKFTheory.html" />
     <link rel="prev" title="4.5. Example 1 - tracking a random sinusoidal signal" href="022EKFExample1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -185,16 +184,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ensemble Kalman Filters</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/031EnKFTheory.html">5. Title 5</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample1.html">5.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample2.html">5.2. EX2</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian and Ensemble Kalman Inversion</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../theory/041BIPTheory.html">6. Title 6</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/042EKITheory.html">7. Title 7</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/041BIPTheory.html">6. Bayesian Inversion</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/042EKITheory.html">7. Ensemble Kalman Inversion</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../EKI/042EKIExample1.html">7.1. EX 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../EKI/042EKIExample2.html">7.2. EX 2</a></li>
 </ul>
@@ -362,7 +361,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="example-2-tracking-a-noisy-pendulum">
+  <div class="tex2jax_ignore mathjax_ignore section" id="example-2-tracking-a-noisy-pendulum">
 <h1><span class="section-number">4.6. </span>Example 2 - tracking a noisy pendulum<a class="headerlink" href="#example-2-tracking-a-noisy-pendulum" title="Permalink to this heading">#</a></h1>
 <p><img alt="Pendulum motion" src="../../_images/pendulum.png" /></p>
 <p>Consider the nonlinear ODE model for the oscillations of a noisy pendulum with unit mass and length <span class="math notranslate nohighlight">\(L,\)</span></p>
@@ -498,7 +497,7 @@ q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{
 <img alt="../../_images/392f9b55b9bca6c1ed86a98351e5a3bab6cde5a7dfdea1dd136d122b9d1cf754.png" src="../../_images/392f9b55b9bca6c1ed86a98351e5a3bab6cde5a7dfdea1dd136d122b9d1cf754.png" />
 </div>
 </div>
-<section id="extended-kalman-filter-ekf">
+<div class="section" id="extended-kalman-filter-ekf">
 <h2><span class="section-number">4.6.1. </span>Extended Kalman Filter (EKF)<a class="headerlink" href="#extended-kalman-filter-ekf" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -576,8 +575,8 @@ q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{
 <img alt="../../_images/17bc0a2f92ae9366f69f7e1c5c6492d918d909d811ad5b0d711376bc817f9108.png" src="../../_images/17bc0a2f92ae9366f69f7e1c5c6492d918d909d811ad5b0d711376bc817f9108.png" />
 </div>
 </div>
-</section>
-<section id="extended-smoother">
+</div>
+<div class="section" id="extended-smoother">
 <h2><span class="section-number">4.6.2. </span>Extended Smoother<a class="headerlink" href="#extended-smoother" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -637,8 +636,8 @@ ERTS RMSE: 0.027612762479911554
 <img alt="../../_images/1d7b24cb29b1d43ff959e77cf323d5a3b1854c4eef4a3db9599350a2e4684833.png" src="../../_images/1d7b24cb29b1d43ff959e77cf323d5a3b1854c4eef4a3db9599350a2e4684833.png" />
 </div>
 </div>
-</section>
-<section id="conclusions-on-extended-kalman-filters">
+</div>
+<div class="section" id="conclusions-on-extended-kalman-filters">
 <h2><span class="section-number">4.6.3. </span>Conclusions on Extended Kalman Filters<a class="headerlink" href="#conclusions-on-extended-kalman-filters" title="Permalink to this heading">#</a></h2>
 <p>The pros and cons of the EKF are:</p>
 <ul class="simple">
@@ -660,8 +659,8 @@ ERTS RMSE: 0.027612762479911554
 </li>
 </ul>
 <p>In spite of this, the EKF remains a solid filter and remains the basis of most GPS and navigation systems.</p>
-</section>
-<section id="references">
+</div>
+<div class="section" id="references">
 <h2><span class="section-number">4.6.4. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><a name="LSZ"></a> K. Law, A Stuart, K. Zygalakis. <em>Data Assimilation. A Mathematical Introduction.</em> Springer. 2015.</p></li>
@@ -669,8 +668,8 @@ ERTS RMSE: 0.027612762479911554
 <li><p><a name="asch2"></a> M. Asch. <em>A Toobox for Digital Twins. From Model-Based to Data-Driven.</em> SIAM. 2022</p></li>
 <li><p><a name="sarkka"></a>  S. Sarkka, L. Svensson. <em>Bayesian Filtering and Smoothing,</em> 2nd ed., Cambridge University Press. 2023.</p></li>
 </ol>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -716,7 +715,7 @@ ERTS RMSE: 0.027612762479911554
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Title 5</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>ENSEMBLE Kalman Filter</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
