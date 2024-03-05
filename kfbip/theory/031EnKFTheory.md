@@ -1,3 +1,7 @@
+```{math}
+\newcommand\widebar[1]{\mathop{\overline{#1}}}
+```
+
 # ENSEMBLE Kalman Filter
 
 The idea behind the EnKF is
@@ -47,15 +51,15 @@ $$
 
 In words:
 
-1. For a given N ∈ N generate i.i.d. ensemble of states random variables
-from the distribution of X(0)
-2. For t ∈ N recursively repeat the following steps:
+1. For a given $N_e \in  \mathbb{N}$ generate i.i.d. ensemble of states random variables
+from the distribution of $X(0).$
+2. For $t \in  \mathbb{N}$ recursively repeat the following steps:
 
  - Advance each ensemble member in time, using the nonlinear state equation
     with independently generated random state noise
  - Compute the forecast sample mean and the forecast sample covariance
  - Compute the sample Kalman gain
- - Add additional perturbation to the observation vector Y using independently generated random variables $\eta(t)$
+ - Add additional perturbation to the observation vector $Y$ using independently generated random variables $\eta(t)$
  - Update each forecast ensemble member
 
 Burgers et al. [1998] shows that without the data perturbation,
@@ -82,8 +86,9 @@ To fix notation:
 - state forecast $X^f,$ dimension $ (N_t \times N_x)$
 - *ensemble* state forecast $\mathbf{X}^f,$ dimension $ (N_t \times N_x \times N_e)$
 - observation, $Y,$ dimension $ (N_t \times N_y)$
-- ensemble state anomaly, $\mathbf{X}' = \mathbf{X} - \bar{\mathbf{X}},$ dimension $ (N_t \times N_x \times N_e)$
-- ensemble observation anomaly,  $\mathbf{Y}' = \mathcal{H}(\mathbf{X}) - \bar{ \mathcal{H}( \mathbf{X} ) },$ dimension $ (N_t \times N_y \times N_e)$
+- ensemble state anomaly, $\mathbf{X}' = \mathbf{X} - \overline{\mathbf{X}},$ dimension $ (N_t \times N_x \times N_e)$ with $ \overline{\mathbf{X}} = (1/N_e) \sum_{e=1}^{N_e} \mathbf{X}_e$
+- ensemble observation anomaly,  $\mathbf{Y}' = \mathcal{H}(\mathbf{X}) - \widebar{ \mathcal{H}(\mathbf{X} ) },$ dimension $ (N_t \times N_y \times N_e)$ with  $ \overline{ \mathcal{H}( \mathbf{X} )} = (1/N_e)
+ \sum_{e=1}^{N_e} \mathcal{H}(\mathbf{X}_e).$
 
 Then, the Kalman analysis update is
 

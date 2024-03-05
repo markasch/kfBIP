@@ -363,7 +363,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="ensemble-kalman-filter">
+  <div class="math notranslate nohighlight">
+\[\newcommand\widebar[1]{\mathop{\bar{#1}}}\]</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="ensemble-kalman-filter">
 <h1><span class="section-number">5. </span>ENSEMBLE Kalman Filter<a class="headerlink" href="#ensemble-kalman-filter" title="Permalink to this heading">#</a></h1>
 <p>The idea behind the EnKF is</p>
 <ol class="arabic simple">
@@ -409,16 +411,16 @@ document.write(`
 \]</div>
 <p>In words:</p>
 <ol class="arabic simple">
-<li><p>For a given N ∈ N generate i.i.d. ensemble of states random variables
-from the distribution of X(0)</p></li>
-<li><p>For t ∈ N recursively repeat the following steps:</p></li>
+<li><p>For a given <span class="math notranslate nohighlight">\(N_e \in  \mathbb{N}\)</span> generate i.i.d. ensemble of states random variables
+from the distribution of <span class="math notranslate nohighlight">\(X(0).\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(t \in  \mathbb{N}\)</span> recursively repeat the following steps:</p></li>
 </ol>
 <ul class="simple">
 <li><p>Advance each ensemble member in time, using the nonlinear state equation
 with independently generated random state noise</p></li>
 <li><p>Compute the forecast sample mean and the forecast sample covariance</p></li>
 <li><p>Compute the sample Kalman gain</p></li>
-<li><p>Add additional perturbation to the observation vector Y using independently generated random variables <span class="math notranslate nohighlight">\(\eta(t)\)</span></p></li>
+<li><p>Add additional perturbation to the observation vector <span class="math notranslate nohighlight">\(Y\)</span> using independently generated random variables <span class="math notranslate nohighlight">\(\eta(t)\)</span></p></li>
 <li><p>Update each forecast ensemble member</p></li>
 </ul>
 <p>Burgers et al. [1998] shows that without the data perturbation,
@@ -444,8 +446,9 @@ standard KF.</p>
 <li><p>state forecast <span class="math notranslate nohighlight">\(X^f,\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_x)\)</span></p></li>
 <li><p><em>ensemble</em> state forecast <span class="math notranslate nohighlight">\(\mathbf{X}^f,\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_x \times N_e)\)</span></p></li>
 <li><p>observation, <span class="math notranslate nohighlight">\(Y,\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_y)\)</span></p></li>
-<li><p>ensemble state anomaly, <span class="math notranslate nohighlight">\(\mathbf{X}' = \mathbf{X} - \bar{\mathbf{X}},\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_x \times N_e)\)</span></p></li>
-<li><p>ensemble observation anomaly,  <span class="math notranslate nohighlight">\(\mathbf{Y}' = \mathcal{H}(\mathbf{X}) - \bar{ \mathcal{H}( \mathbf{X} ) },\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_y \times N_e)\)</span></p></li>
+<li><p>ensemble state anomaly, <span class="math notranslate nohighlight">\(\mathbf{X}' = \mathbf{X} - \overline{\mathbf{X}},\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_x \times N_e)\)</span> with <span class="math notranslate nohighlight">\( \overline{\mathbf{X}} = (1/N_e) \sum_{e=1}^{N_e} \mathbf{X}_e\)</span></p></li>
+<li><p>ensemble observation anomaly,  <span class="math notranslate nohighlight">\(\mathbf{Y}' = \mathcal{H}(\mathbf{X}) - \widebar{ \mathcal{H}(\mathbf{X} ) },\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_y \times N_e)\)</span> with  <span class="math notranslate nohighlight">\( \overline{ \mathcal{H}( \mathbf{X} )} = (1/N_e)
+\sum_{e=1}^{N_e} \mathcal{H}(\mathbf{X}_e).\)</span></p></li>
 </ul>
 <p>Then, the Kalman analysis update is</p>
 <div class="math notranslate nohighlight">

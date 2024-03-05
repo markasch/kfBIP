@@ -399,8 +399,8 @@ document.write(`
 \[v_0 \perp {\xi_j} \perp {\eta_j}\]</div>
 </li>
 <li><p>Operators:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f52b9b71-ea7f-4ff2-a12c-2bec08152581">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-f52b9b71-ea7f-4ff2-a12c-2bec08152581" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-47a7411d-e4f6-4d78-be5a-79cfad31bb6a">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-47a7411d-e4f6-4d78-be5a-79cfad31bb6a" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 	  \Psi \colon \mathcal{H}_s &amp;\mapsto \mathcal{H}_s, \\
 	  h  \colon \mathcal{H}_s &amp;\mapsto \mathcal{H}_o,
 	 \end{eqnarray}\]</div>
@@ -414,8 +414,8 @@ document.write(`
 <li><p>all distributions are Gaussian.</p></li>
 </ul>
 <p>Suppose</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d423bedf-e142-4daa-8401-2a43f76e766f">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-d423bedf-e142-4daa-8401-2a43f76e766f" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-ee4c3d45-40a5-4b44-a754-736440547261">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-ee4c3d45-40a5-4b44-a754-736440547261" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
    \Psi(v) &amp;= Mv \\
    h(v) &amp;= Hv,
 \end{eqnarray}\]</div>
@@ -432,15 +432,15 @@ document.write(`
 <ul>
 <li><p>P0: initialize <span class="math notranslate nohighlight">\((m_0, C_0)\)</span> and compute <span class="math notranslate nohighlight">\(v_0\)</span></p></li>
 <li><p>P1: predict the state, measurement</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1496a776-d84b-4e16-a77f-0e786faee539">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-1496a776-d84b-4e16-a77f-0e786faee539" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-427cca03-e3d8-4769-907a-e9c770f04a52">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-427cca03-e3d8-4769-907a-e9c770f04a52" title="Permalink to this equation">#</a></span>\[\begin{align}
      v_{j+1} &amp;= M v_j + \xi_j \\
      y_{j+1} &amp;= H v_{j+1} + \eta_{j+1}
      \end{align}\]</div>
 </li>
 <li><p>P2: predict the mean and covariance</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7887d3f2-1e35-45f7-a876-65c2e43c643e">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-7887d3f2-1e35-45f7-a876-65c2e43c643e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fda2ef9c-fb85-44f3-bd3b-33c57811d21a">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-fda2ef9c-fb85-44f3-bd3b-33c57811d21a" title="Permalink to this equation">#</a></span>\[\begin{align}
      \hat{m}_{j+1}  &amp;= M m_j \\
      \hat{C}_{j+1}  &amp;= M C_j M^{\mathrm{T}} + \Sigma
      \end{align}\]</div>
@@ -465,8 +465,8 @@ document.write(`
 \[ K_{j+1} = \hat{C}_{j+1} H^{\mathrm{T}}  S_{j+1}^{-1} \]</div>
 </li>
 <li><p>C4: update/correct the mean and covariance</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d5cef0e2-2690-436e-8a55-df5fcb337171">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-d5cef0e2-2690-436e-8a55-df5fcb337171" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bbebc9c9-747a-4c8c-a558-7f6368f37887">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-bbebc9c9-747a-4c8c-a558-7f6368f37887" title="Permalink to this equation">#</a></span>\[\begin{align}
      {m}_{j+1}  &amp;= \hat{m}_{j+1} + K_{j+1} d_{j+1}, \\
      {C}_{j+1}  &amp;= \hat{C}_{j+1} - K_{j+1}  S_{j+1}  K_{j+1}^{\mathrm{T}}.
      \end{align}\]</div>
@@ -484,8 +484,8 @@ document.write(`
 <div class="section" id="state-space-formulation">
 <h2><span class="section-number">3.3. </span>State-space formulation<a class="headerlink" href="#state-space-formulation" title="Permalink to this heading">#</a></h2>
 <p>In classical (linear) filter theory, a state space formulation is usually used.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1a47ad09-e9ec-4483-9e1e-7cf6e393e4c6">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-1a47ad09-e9ec-4483-9e1e-7cf6e393e4c6" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-c10f1d2d-2812-4d44-8d61-714a097a4917">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-c10f1d2d-2812-4d44-8d61-714a097a4917" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  &amp;&amp; x_{k+1}  = F x_k + B u_k + w_k \\
  &amp;&amp; y_{k+1}  = H x_k + v_k,
 \end{eqnarray}\]</div>
@@ -495,14 +495,14 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ x_0, \quad P_0 \]</div>
 <p><strong>1. Prediction</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-f2d71b8d-7d9c-469f-af38-e22ec305efe1">
-<span class="eqno">(3.7)<a class="headerlink" href="#equation-f2d71b8d-7d9c-469f-af38-e22ec305efe1" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-32e6b739-84c3-4e47-9a94-0aa14f2d8860">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-32e6b739-84c3-4e47-9a94-0aa14f2d8860" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
  &amp;&amp; x_{k+1}^- = F x_k \\
  &amp;&amp; P_{k+1}^- = F P_k F^{\mathrm{T}} + Q 
 \end{eqnarray}\]</div>
 <p><strong>2. Correction</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-89533aab-f244-4712-ac54-1d75c64f2a6d">
-<span class="eqno">(3.8)<a class="headerlink" href="#equation-89533aab-f244-4712-ac54-1d75c64f2a6d" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-a9ff6e2e-d648-4940-b54a-50a1525f50bd">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-a9ff6e2e-d648-4940-b54a-50a1525f50bd" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
   K_{k+1} &amp;&amp; = P_{k+1}^{-} H^{\mathrm{T}} ( H  P_{k+1}^{-} H^{\mathrm{T}} + R )^{-1}
                \quad (= P_{k+1}^- H^{\mathrm{T}} S^{-1})\\
   x_{k+1} &amp;&amp;= x_{k+1}^{-} + K_{k+1} (y_{k+1} - H x_{k+1}^- ) \\
@@ -530,8 +530,8 @@ document.write(`
   \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = F \mathbf{x}(t) + L \mathbf{w}(t) , \quad \mathbf{x}(0) = \mathbf{x}_0,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{w}(t)\)</span> is a white, Gaussian noise process with expectation and covariance</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9a487251-2acf-455c-8887-5264022db243">
-<span class="eqno">(3.9)<a class="headerlink" href="#equation-9a487251-2acf-455c-8887-5264022db243" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f02be612-be67-4a00-ad07-799ed2794e7b">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-f02be612-be67-4a00-ad07-799ed2794e7b" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp; \mathrm{E}[\mathbf{w}(t)] = 0, \\
 &amp; \mathrm{Cov}[\mathbf{w}(\tau_1)\mathbf{w}(\tau_2)] = \delta(\tau_1 - \tau_2) Q^c
 \end{align}\]</div>
@@ -557,7 +557,7 @@ document.write(`
 \[
   Q_k = \int_0^{\Delta t_{k}}  \exp (F s) L Q^c L^{\mathrm{T}} \exp (F s)^{\mathrm{T}} \mathrm{d}s.
 \]</div>
-<p>Usually, <span class="math notranslate nohighlight">\(F\)</span> is nilpotent to some order, so the computation of the matrix exponential is relatively easy to do. This will be illustrated in the examples.</p>
+<p>Usually, <span class="math notranslate nohighlight">\(F\)</span> is nilpotent to some low order, so the computation of the matrix exponential is relatively easy to do. This will be illustrated in the examples.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>

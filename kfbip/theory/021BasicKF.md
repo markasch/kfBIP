@@ -200,5 +200,5 @@ $$
   Q_k = \int_0^{\Delta t_{k}}  \exp (F s) L Q^c L^{\mathrm{T}} \exp (F s)^{\mathrm{T}} \mathrm{d}s.
 $$
 
-Usually, $F$ is nilpotent to some order, so the computation of the matrix exponential is relatively easy to do. This will be illustrated in the examples.
+Usually, $F$ is nilpotent to some low order, so the computation of the matrix exponential is relatively easy to do. This will be illustrated in the examples.
 
