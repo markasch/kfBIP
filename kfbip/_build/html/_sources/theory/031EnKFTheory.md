@@ -1,5 +1,5 @@
 ```{math}
-\newcommand\widebar[1]{\mathop{\bar{#1}}}
+\newcommand\widebar[1]{\mathop{\overline{#1}}}
 ```
 
 # ENSEMBLE Kalman Filter
@@ -87,7 +87,7 @@ To fix notation:
 - *ensemble* state forecast $\mathbf{X}^f,$ dimension $ (N_t \times N_x \times N_e)$
 - observation, $Y,$ dimension $ (N_t \times N_y)$
 - ensemble state anomaly, $\mathbf{X}' = \mathbf{X} - \overline{\mathbf{X}},$ dimension $ (N_t \times N_x \times N_e)$ with $ \overline{\mathbf{X}} = (1/N_e) \sum_{e=1}^{N_e} \mathbf{X}_e$
-- ensemble observation anomaly,  $\mathbf{Y}' = \mathcal{H}(\mathbf{X}) - \widebar{ \mathcal{H}(\mathbf{X} ) },$ dimension $ (N_t \times N_y \times N_e)$ with  $ \overline{ \mathcal{H}( \mathbf{X} )} = (1/N_e)
+- ensemble observation anomaly,  $\mathbf{Y}' = \mathcal{H}(\mathbf{X}) - \overline{ \mathcal{H}(\mathbf{X} ) },$ dimension $ (N_t \times N_y \times N_e)$ with  $ \overline{ \mathcal{H}( \mathbf{X} )} = (1/N_e)
  \sum_{e=1}^{N_e} \mathcal{H}(\mathbf{X}_e).$
 
 Then, the Kalman analysis update is
@@ -96,12 +96,14 @@ $$
  \mathbf{X}^\mathrm{a} = \mathbf{X}^\mathrm{f} + \frac{1}{N_e - 1} \mathbf{X}'(\mathbf{Y}')^\mathrm{T} S^{-1} D,
 $$
 
-where
+with
 
 $$  \begin{align}
- S &= \frac{1}{N_e - 1} \mathbf{Y}'(\mathbf{Y}')^\mathrm{T} \quad \text{(observation covariance)} \\
- D &= (Y + y) - \mathcal{H}(\mathbf{X}) \quad \text{(innovation)}.
+ S &= \frac{1}{N_e - 1} \mathbf{Y}'(\mathbf{Y}')^\mathrm{T} + R\quad \text{(observation covariance)} \\
+ D &= (Y + y) - \mathcal{H}(\mathbf{X}) \quad \text{(innovation)},
 \end{align} $$
+
+where $y \sim \mathcal{N}(0,R)$ is the stochastic perturbation, and $R$ is the measurement noise covariance.
 
 Or, defining the Kalman gain matrix as
 

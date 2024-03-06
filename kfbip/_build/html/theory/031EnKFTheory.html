@@ -364,7 +364,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="math notranslate nohighlight">
-\[\newcommand\widebar[1]{\mathop{\bar{#1}}}\]</div>
+\[\newcommand\widebar[1]{\mathop{\overline{#1}}}\]</div>
 <div class="tex2jax_ignore mathjax_ignore section" id="ensemble-kalman-filter">
 <h1><span class="section-number">5. </span>ENSEMBLE Kalman Filter<a class="headerlink" href="#ensemble-kalman-filter" title="Permalink to this heading">#</a></h1>
 <p>The idea behind the EnKF is</p>
@@ -447,7 +447,7 @@ standard KF.</p>
 <li><p><em>ensemble</em> state forecast <span class="math notranslate nohighlight">\(\mathbf{X}^f,\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_x \times N_e)\)</span></p></li>
 <li><p>observation, <span class="math notranslate nohighlight">\(Y,\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_y)\)</span></p></li>
 <li><p>ensemble state anomaly, <span class="math notranslate nohighlight">\(\mathbf{X}' = \mathbf{X} - \overline{\mathbf{X}},\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_x \times N_e)\)</span> with <span class="math notranslate nohighlight">\( \overline{\mathbf{X}} = (1/N_e) \sum_{e=1}^{N_e} \mathbf{X}_e\)</span></p></li>
-<li><p>ensemble observation anomaly,  <span class="math notranslate nohighlight">\(\mathbf{Y}' = \mathcal{H}(\mathbf{X}) - \widebar{ \mathcal{H}(\mathbf{X} ) },\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_y \times N_e)\)</span> with  <span class="math notranslate nohighlight">\( \overline{ \mathcal{H}( \mathbf{X} )} = (1/N_e)
+<li><p>ensemble observation anomaly,  <span class="math notranslate nohighlight">\(\mathbf{Y}' = \mathcal{H}(\mathbf{X}) - \overline{ \mathcal{H}(\mathbf{X} ) },\)</span> dimension <span class="math notranslate nohighlight">\( (N_t \times N_y \times N_e)\)</span> with  <span class="math notranslate nohighlight">\( \overline{ \mathcal{H}( \mathbf{X} )} = (1/N_e)
 \sum_{e=1}^{N_e} \mathcal{H}(\mathbf{X}_e).\)</span></p></li>
 </ul>
 <p>Then, the Kalman analysis update is</p>
@@ -455,12 +455,13 @@ standard KF.</p>
 \[ 
  \mathbf{X}^\mathrm{a} = \mathbf{X}^\mathrm{f} + \frac{1}{N_e - 1} \mathbf{X}'(\mathbf{Y}')^\mathrm{T} S^{-1} D,
 \]</div>
-<p>where</p>
+<p>with</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}  \begin{align}
- S &amp;= \frac{1}{N_e - 1} \mathbf{Y}'(\mathbf{Y}')^\mathrm{T} \quad \text{(observation covariance)} \\
- D &amp;= (Y + y) - \mathcal{H}(\mathbf{X}) \quad \text{(innovation)}.
+ S &amp;= \frac{1}{N_e - 1} \mathbf{Y}'(\mathbf{Y}')^\mathrm{T} + R\quad \text{(observation covariance)} \\
+ D &amp;= (Y + y) - \mathcal{H}(\mathbf{X}) \quad \text{(innovation)},
 \end{align} \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(y \sim \mathcal{N}(0,R)\)</span> is the stochastic perturbation, and <span class="math notranslate nohighlight">\(R\)</span> is the measurement noise covariance.</p>
 <p>Or, defining the Kalman gain matrix as</p>
 <div class="math notranslate nohighlight">
 \[
