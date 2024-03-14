@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>4.5. Example 1 - tracking a random sinusoidal signal &#8212; kfBIP</title>
   
   
@@ -187,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -348,7 +350,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="example-1-tracking-a-random-sinusoidal-signal">
+  <section class="tex2jax_ignore mathjax_ignore" id="example-1-tracking-a-random-sinusoidal-signal">
 <h1><span class="section-number">4.5. </span>Example 1 - tracking a random sinusoidal signal<a class="headerlink" href="#example-1-tracking-a-random-sinusoidal-signal" title="Permalink to this heading">#</a></h1>
 <p>Before introducing more general nonlinear dyanmic systems (see the following examples), let us consider a simple case of tracking a random sine signal whose angular velocity and amplitude vary, randomly, over time. We express the nonlinearity through the measurement model, though this could be done with the dynamic model, as in the examples below.</p>
 <p>Let the state vector be</p>
@@ -411,7 +413,7 @@ A_k = \begin{bmatrix} 0 &amp; \Delta t &amp; 0\\ 0 &amp; 1 &amp; 0 \\  0 &amp; 0
 \[
   Dh_k = [ a_k \cos \theta_k \quad 0 \quad \sin \theta_k ]
 \]</div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {

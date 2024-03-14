@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>3.6. Example 2 - scalar, Gaussian random walk &#8212; kfBIP</title>
   
   
@@ -187,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EnKF/032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -359,7 +361,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="example-2-scalar-gaussian-random-walk">
+  <section class="tex2jax_ignore mathjax_ignore" id="example-2-scalar-gaussian-random-walk">
 <h1><span class="section-number">3.6. </span>Example 2 - scalar, Gaussian random walk<a class="headerlink" href="#example-2-scalar-gaussian-random-walk" title="Permalink to this heading">#</a></h1>
 <p>Suppose that we have measurements of the scalar <span class="math notranslate nohighlight">\(y_k\)</span> from the Gaussian random walk model</p>
 <div class="amsmath math notranslate nohighlight" id="equation-a4d6e2e7-d6b2-407b-a785-27529ab7a2a4">
@@ -446,7 +448,7 @@ document.write(`
 <img alt="../../_images/dba9180ce90c0769630185f2b1fd87d1c69fff3ac7eba8cc4dbfde22a3a34527.png" src="../../_images/dba9180ce90c0769630185f2b1fd87d1c69fff3ac7eba8cc4dbfde22a3a34527.png" />
 </div>
 </div>
-<div class="section" id="implementation-of-the-kf">
+<section id="implementation-of-the-kf">
 <h2><span class="section-number">3.6.1. </span>Implementation of the KF<a class="headerlink" href="#implementation-of-the-kf" title="Permalink to this heading">#</a></h2>
 <p>Here is a straigthforward, matrix-based implementation of teh KF that follows exactly the thoeretical formulation above.</p>
 <p>For more generality, below we will rewrite the Kalman filter as a class.</p>
@@ -498,8 +500,8 @@ document.write(`
 <img alt="../../_images/db294d8f26671ee2ed076d040e69d2791984a9347389e46e727e44add7b72cf8.png" src="../../_images/db294d8f26671ee2ed076d040e69d2791984a9347389e46e727e44add7b72cf8.png" />
 </div>
 </div>
-</div>
-<div class="section" id="implementation-of-kf-as-a-class">
+</section>
+<section id="implementation-of-kf-as-a-class">
 <h2><span class="section-number">3.6.2. </span>Implementation of KF as a class<a class="headerlink" href="#implementation-of-kf-as-a-class" title="Permalink to this heading">#</a></h2>
 <p>For more generality, we rewrite the Kalman filter as a class.</p>
 <div class="cell docutils container">
@@ -644,8 +646,8 @@ document.write(`
 <img alt="../../_images/48cc8180d6a9ff808b87c2eb43124e91526fb9ae35f6afaca207b7c87c928e34.png" src="../../_images/48cc8180d6a9ff808b87c2eb43124e91526fb9ae35f6afaca207b7c87c928e34.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

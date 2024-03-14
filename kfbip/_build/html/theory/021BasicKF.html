@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>3. Kalman Filters &#8212; kfBIP</title>
   
   
@@ -187,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -366,9 +368,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="kalman-filters">
+  <section class="tex2jax_ignore mathjax_ignore" id="kalman-filters">
 <h1><span class="section-number">3. </span>Kalman Filters<a class="headerlink" href="#kalman-filters" title="Permalink to this heading">#</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2><span class="section-number">3.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>The Kalman filter can be used for</p>
 <ul class="simple">
@@ -376,8 +378,8 @@ document.write(`
 <li><p>parameter estimation—this is the inverse problem based on filtering with a pseudo-time</p></li>
 </ul>
 <p>Kalman filters are linear (and Gaussian) or nonlinear. Among the nonlinear approaches, the Ensemble Kalman filter (EnKF) provides a <em>derivative-free</em> approach to the solution of inverse problems.</p>
-</div>
-<div class="section" id="kalman-filter-problem-general-formulation">
+</section>
+<section id="kalman-filter-problem-general-formulation">
 <h2><span class="section-number">3.2. </span>Kalman filter problem - General formulation<a class="headerlink" href="#kalman-filter-problem-general-formulation" title="Permalink to this heading">#</a></h2>
 <p>We present a very general formulation that will later be convenient for joint state and parameter estimation problems.</p>
 <p>We consider a discrete-time dynamical system with noisy state transitions and noisy observations.</p>
@@ -425,7 +427,7 @@ document.write(`
 <li><p>Let  <span class="math notranslate nohighlight">\((\hat{m}_{j+1}, \hat{C}_{j+1})\)</span> denote the mean and covariance of <span class="math notranslate nohighlight">\(v_{j+1} \vert Y_j\)</span>  and note that these entirely characterize the random variable since it is Gaussian.</p></li>
 <li><p>Derive the map <span class="math notranslate nohighlight">\((m_j, C_j) \mapsto (m_{j+1}, C_{j+1})\)</span> using the previous step.</p></li>
 </ol>
-<div class="section" id="prediction-forecast">
+<section id="prediction-forecast">
 <h3><span class="section-number">3.2.1. </span>Prediction/Forecast<a class="headerlink" href="#prediction-forecast" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ \mathbb{P}(v_n \vert y_1, \ldots, y_n) \mapsto \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_n) \]</div>
@@ -446,8 +448,8 @@ document.write(`
      \end{align}\]</div>
 </li>
 </ul>
-</div>
-<div class="section" id="correction-analysis">
+</section>
+<section id="correction-analysis">
 <h3><span class="section-number">3.2.2. </span>Correction/Analysis<a class="headerlink" href="#correction-analysis" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_n) \mapsto \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_{n+1}) \]</div>
@@ -472,16 +474,16 @@ document.write(`
      \end{align}\]</div>
 </li>
 </ul>
-</div>
-<div class="section" id="loop-over-time">
+</section>
+<section id="loop-over-time">
 <h3><span class="section-number">3.2.3. </span>Loop over time<a class="headerlink" href="#loop-over-time" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>set <span class="math notranslate nohighlight">\(j = j+1\)</span></p></li>
 <li><p>go to step P1</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="state-space-formulation">
+</section>
+</section>
+<section id="state-space-formulation">
 <h2><span class="section-number">3.3. </span>State-space formulation<a class="headerlink" href="#state-space-formulation" title="Permalink to this heading">#</a></h2>
 <p>In classical (linear) filter theory, a state space formulation is usually used.</p>
 <div class="amsmath math notranslate nohighlight" id="equation-c10f1d2d-2812-4d44-8d61-714a097a4917">
@@ -513,15 +515,15 @@ document.write(`
 <p>Set <span class="math notranslate nohighlight">\(k = k+1\)</span> and go to step 1.</p>
 <div class="proof remark admonition" id="remark-0">
 <p class="admonition-title"><span>Remark </span> (Notation)</p>
-<div class="remark-content section" id="proof-content">
+<section class="remark-content" id="proof-content">
 <p>In some cases, the superscripts <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> are used to denote the forecast/prediction, and analysis/correction variables, respectively. We avoid this, for clarity of notation.</p>
-</div>
+</section>
 </div><div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>In some cases, the superscripts <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> are used to denote the forecast/prediction, and analysis/correction variables, respectively. We avoid this, for clarity of notation.</p>
 </div>
-</div>
-<div class="section" id="passage-from-continuous-to-discrete-for-random-dynamic-systems">
+</section>
+<section id="passage-from-continuous-to-discrete-for-random-dynamic-systems">
 <h2><span class="section-number">3.4. </span>Passage from Continuous to Discrete for Random Dynamic Systems<a class="headerlink" href="#passage-from-continuous-to-discrete-for-random-dynamic-systems" title="Permalink to this heading">#</a></h2>
 <p>Most often, in the use of Kalman filtering, we deal with a continuous dynamic system that is modelled by a system of ODEs, with some random process noise. The passage from the continuous to a discrete-time formulation, which is needed for the KF, requires some attention. Following {cite}Sarkka2023, we will derive the associated discretization of the process matrix and the process noise covariance matrix.</p>
 <p>Suppose we have a linear, time invariant (LTI) system of ODEs with an additive random noise term (this is the engineering approach that avoids the use of SDEs and Itô calculus—see {cite}Asch2022 )</p>
@@ -558,10 +560,10 @@ document.write(`
   Q_k = \int_0^{\Delta t_{k}}  \exp (F s) L Q^c L^{\mathrm{T}} \exp (F s)^{\mathrm{T}} \mathrm{d}s.
 \]</div>
 <p>Usually, <span class="math notranslate nohighlight">\(F\)</span> is nilpotent to some low order, so the computation of the matrix exponential is relatively easy to do. This will be illustrated in the examples.</p>
-</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {

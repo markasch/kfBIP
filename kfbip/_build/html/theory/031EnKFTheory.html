@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>5. ENSEMBLE Kalman Filter &#8212; kfBIP</title>
   
   
@@ -187,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">5. ENSEMBLE Kalman Filter</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -194,8 +196,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="041BIPTheory.html">6. Bayesian Inversion</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="042EKITheory.html">7. Ensemble Kalman Inversion</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/EKI/042EKIExample1.html">7.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/EKI/042EKIExample2.html">7.2. EX 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EKI/042EKIExample1.html">7.5. EX 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EKI/042EKIExample2.html">7.6. EX 2</a></li>
 </ul>
 </li>
 </ul>
@@ -365,7 +367,7 @@ document.write(`
                   
   <div class="math notranslate nohighlight">
 \[\newcommand\widebar[1]{\mathop{\overline{#1}}}\]</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="ensemble-kalman-filter">
+<section class="tex2jax_ignore mathjax_ignore" id="ensemble-kalman-filter">
 <h1><span class="section-number">5. </span>ENSEMBLE Kalman Filter<a class="headerlink" href="#ensemble-kalman-filter" title="Permalink to this heading">#</a></h1>
 <p>The idea behind the EnKF is</p>
 <ol class="arabic simple">
@@ -379,9 +381,9 @@ document.write(`
 <li><p>adding noise to the data in order to avoid a shrinking of the ensemble spread and to obtain the correct filtering covariance in the limit</p></li>
 </ul>
 <p>Here are the steps for the so-called <strong>stochastic EnKF</strong>, where we add an artificial, random perturbation to the observations, and we assume we have a linear observation operator, <span class="math notranslate nohighlight">\(H.\)</span></p>
-<div class="section" id="stochastic-enkf-linear-observation-operator">
+<section id="stochastic-enkf-linear-observation-operator">
 <h2><span class="section-number">5.1. </span>Stochastic EnKF - linear observation operator<a class="headerlink" href="#stochastic-enkf-linear-observation-operator" title="Permalink to this heading">#</a></h2>
-<div class="section" id="prediction-forecast">
+<section id="prediction-forecast">
 <h3><span class="section-number">5.1.1. </span>Prediction/Forecast<a class="headerlink" href="#prediction-forecast" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -392,8 +394,8 @@ document.write(`
                      \left( \hat{v}_{k+1}^{n} - \hat{m}_{k+1}  \right)^{\mathrm{T}}
 \end{align}
 \end{split}\]</div>
-</div>
-<div class="section" id="correction-analysis">
+</section>
+<section id="correction-analysis">
 <h3><span class="section-number">5.1.2. </span>Correction/Analysis<a class="headerlink" href="#correction-analysis" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -429,9 +431,9 @@ data perturbation also guarantees that the relation between the forecast sample
 covariance and the analysis sample covariance
 is analogous to the relation between the forecast and analysis covariances in the
 standard KF.</p>
-</div>
-</div>
-<div class="section" id="full-nonlinear-formulation-of-the-ensemble-kalman-filter">
+</section>
+</section>
+<section id="full-nonlinear-formulation-of-the-ensemble-kalman-filter">
 <h2><span class="section-number">5.2. </span>Full nonlinear formulation of the ensemble Kalman filter<a class="headerlink" href="#full-nonlinear-formulation-of-the-ensemble-kalman-filter" title="Permalink to this heading">#</a></h2>
 <p>There are many ways to formulate the EnKF. Following Vetra-Carvalho, et al (Tellus A, 2018), we express the filter in terms of the anomalies of state and observations. This is indispensable for fully nonlinear state and measurement models,</p>
 <div class="math notranslate nohighlight">
@@ -461,7 +463,7 @@ standard KF.</p>
  S &amp;= \frac{1}{N_e - 1} \mathbf{Y}'(\mathbf{Y}')^\mathrm{T} + R\quad \text{(observation covariance)} \\
  D &amp;= (Y + y) - \mathcal{H}(\mathbf{X}) \quad \text{(innovation)},
 \end{align} \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(y \sim \mathcal{N}(0,R)\)</span> is the stochastic perturbation, and <span class="math notranslate nohighlight">\(R\)</span> is the measurement noise covariance.</p>
+<p>where <span class="math notranslate nohighlight">\(y \sim \mathcal{N}(0,R)\)</span> is the stochastic perturbation, and <span class="math notranslate nohighlight">\(R\)</span> is the measurement noise covariance matrix.</p>
 <p>Or, defining the Kalman gain matrix as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -472,10 +474,10 @@ standard KF.</p>
 \[
    \mathbf{X}^\mathrm{a} = \mathbf{X}^\mathrm{f}  + K D.
 \]</div>
-</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {

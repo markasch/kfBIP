@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>5.3. Example 1: noisy pendulum &#8212; kfBIP</title>
   
   
@@ -187,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../theory/031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -359,7 +361,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="example-1-noisy-pendulum">
+  <section class="tex2jax_ignore mathjax_ignore" id="example-1-noisy-pendulum">
 <h1><span class="section-number">5.3. </span>Example 1: noisy pendulum<a class="headerlink" href="#example-1-noisy-pendulum" title="Permalink to this heading">#</a></h1>
 <p>Consider the nonlinear ODE model for the oscillations of a noisy pendulum with unit mass and length <span class="math notranslate nohighlight">\(L,\)</span></p>
 <div class="math notranslate nohighlight">
@@ -488,7 +490,7 @@ q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{
 </div>
 </div>
 </div>
-<div class="section" id="generate-noisy-observations">
+<section id="generate-noisy-observations">
 <h2><span class="section-number">5.3.1. </span>Generate noisy observations<a class="headerlink" href="#generate-noisy-observations" title="Permalink to this heading">#</a></h2>
 <p>To generate the noisy observations, we have 2 options</p>
 <ol class="arabic simple">
@@ -601,8 +603,8 @@ q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{
 <img alt="../../_images/48cc29a4a656e94c7bd2f5136f514df63fc7f5f5087e643a53ee8b5b8e5d2c0f.png" src="../../_images/48cc29a4a656e94c7bd2f5136f514df63fc7f5f5087e643a53ee8b5b8e5d2c0f.png" />
 </div>
 </div>
-</div>
-<div class="section" id="ensemble-kalman-filter">
+</section>
+<section id="ensemble-kalman-filter">
 <h2><span class="section-number">5.3.2. </span>Ensemble Kalman Filter<a class="headerlink" href="#ensemble-kalman-filter" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -651,9 +653,10 @@ q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize state and covariance</span>
-<span class="c1">#m_0 = np.array([1.6, 0.])  # Slightly off</span>
-<span class="c1">#P_0 = np.array([[0.1, 0.], </span>
-<span class="c1">#                [0., 0.1]])</span>
+<span class="n">x_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>   <span class="c1"># Initial state</span>
+<span class="n">m_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>   <span class="c1"># Initial state estimate (slightly off)</span>
+<span class="n">P_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">r</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> 
+                <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="n">r</span><span class="p">]])</span> <span class="c1"># Initial estimate covariance</span>
 
 <span class="n">enkf_m</span><span class="p">,</span> <span class="n">enkf_P</span> <span class="o">=</span> <span class="n">ens_kalman_filter</span><span class="p">(</span><span class="n">m_0</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">Ne</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
@@ -694,7 +697,7 @@ q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x1</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trajectory&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;EnKF estimate&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
@@ -706,7 +709,7 @@ q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/59201e5e524bfcadbd7e09918dcc6727d2e90fd66b38d9966e249b8c3e54deab.png" src="../../_images/59201e5e524bfcadbd7e09918dcc6727d2e90fd66b38d9966e249b8c3e54deab.png" />
+<img alt="../../_images/fbac71c0f207493a5d4914b0cc4892421b5cd01499af0c6b9234f31ca3f9709c.png" src="../../_images/fbac71c0f207493a5d4914b0cc4892421b5cd01499af0c6b9234f31ca3f9709c.png" />
 </div>
 </div>
 <div class="warning admonition">
@@ -714,8 +717,8 @@ q_{11}=q_{c}\frac{\Delta t^{3}}{3},\quad q_{12}=q_{21}=q_{c}\frac{\Delta t^{2}}{
 <p>The ensemble Kalman filter tracks rapidly, smoothly and accurately the noisy trajectory of the pendulum. This can be compared to the performance of the EKF (extended Kalman filter) in Example 2, Section 4, that was less accurate (took longer to catch up) and was more noisy.</p>
 <p>Note that the error/anomaly covariance elements, <span class="math notranslate nohighlight">\(P_{ii},\)</span> are noisy, since they are empirically averaged quantities.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

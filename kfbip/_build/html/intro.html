@@ -7,8 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to kfBIP &#8212; kfBIP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to Kalman Filters: from Bayes to Inverse Problems &#8212; kfBIP</title>
   
   
   
@@ -184,6 +185,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="theory/031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/EnKF/032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/EnKF/032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/EnKF/032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -191,8 +193,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="theory/041BIPTheory.html">6. Bayesian Inversion</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="theory/042EKITheory.html">7. Ensemble Kalman Inversion</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/EKI/042EKIExample1.html">7.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/EKI/042EKIExample2.html">7.2. EX 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/EKI/042EKIExample1.html">7.5. EX 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/EKI/042EKIExample2.html">7.6. EX 2</a></li>
 </ul>
 </li>
 </ul>
@@ -333,7 +335,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to kfBIP</h1>
+    <h1>Welcome to Kalman Filters: from Bayes to Inverse Problems</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -358,12 +360,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="welcome-to-kfbip">
-<h1>Welcome to kfBIP<a class="headerlink" href="#welcome-to-kfbip" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-kalman-filters-from-bayes-to-inverse-problems">
+<h1>Welcome to <em>Kalman Filters: from Bayes to Inverse Problems</em><a class="headerlink" href="#welcome-to-kalman-filters-from-bayes-to-inverse-problems" title="Permalink to this heading">#</a></h1>
 <p>This book contains a presentation of Kalman filters, from basics to ensemble filters. A large number of examples are provided in the form of jupyter notebooks. Then the notion of Bayesian inverse problems (BIP) is introduced.  Finally, there is a detailed presentation of the use of the ensemble Kalman filter as a basis for the solution of inverse problems. This is denoted EKI, or ensemble Kalman inversion, following the magnificent work of Andrew Stuart and his collaborators.</p>
 <p>This book is based upon a number of sources. The original Bayesian formulation for inverse problems <span id="id1">[<a class="reference internal" href="#id14" title="Masoumeh Dashti and Andrew M. Stuart. The Bayesian Approach to Inverse Problems. In Roger Ghanem, David Higdon, and Houman Owhadi, editors, Handbook of Uncertainty Quantification, pages 1–118. Springer International Publishing, Cham, 2015. URL: https://link.springer.com/10.1007/978-3-319-11259-6_7-1 (visited on 2024-01-08), doi:10.1007/978-3-319-11259-6_7-1.">4</a>]</span> was the basis for the later ensemble Kalman inversion, presented in a series of papers <span id="id2">[<a class="reference internal" href="#id15" title="Marco A Iglesias, Kody J H Law, and Andrew M Stuart. Ensemble Kalman methods for inverse problems. Inverse Problems, 29(4):045001, April 2013. URL: https://iopscience.iop.org/article/10.1088/0266-5611/29/4/045001 (visited on 2024-01-03), doi:10.1088/0266-5611/29/4/045001.">6</a>]</span>, <span id="id3">[<a class="reference internal" href="#id16" title="Edoardo Calvello, Sebastian Reich, and Andrew M. Stuart. Ensemble Kalman Methods: A Mean Field Perspective. September 2022. arXiv:2209.11371 [cs, math]. URL: http://arxiv.org/abs/2209.11371 (visited on 2024-01-03).">3</a>]</span>, <span id="id4">[<a class="reference internal" href="#id13" title="Daniel Zhengyu Huang, Jiaoyang Huang, Sebastian Reich, and Andrew M. Stuart. Efficient Derivative-free Bayesian Inference for Large-Scale Inverse Problems. August 2022. arXiv:2204.04386 [cs, math]. URL: http://arxiv.org/abs/2204.04386 (visited on 2024-01-03).">5</a>]</span>.</p>
 <p>In <span id="id5">[<a class="reference internal" href="#id9" title="Mark Asch, Marc Bocquet, and Maëlle Nodet. Data Assimilation: Methods, Algorithms, and Applications. Society for Industrial and Applied Mathematics, Philadelphia, PA, December 2016. ISBN 978-1-61197-453-9 978-1-61197-454-6. URL: http://epubs.siam.org/doi/book/10.1137/1.9781611974546 (visited on 2024-01-03), doi:10.1137/1.9781611974546.">2</a>]</span> and <span id="id6">[<a class="reference internal" href="#id12" title="Kody Law, Andrew Stuart, and Konstantinos Zygalakis. Data Assimilation: A Mathematical Introduction. Volume 62 of Texts in Applied Mathematics. Springer International Publishing, Cham, 2015. ISBN 978-3-319-20324-9 978-3-319-20325-6. URL: https://link.springer.com/10.1007/978-3-319-20325-6 (visited on 2024-02-29), doi:10.1007/978-3-319-20325-6.">7</a>]</span> the reader can find detailed presentations of Kalman filters approaches for data assimilation. In  <span id="id7">[<a class="reference internal" href="#id10" title="Mark Asch. A Toolbox for Digital Twins: From Model-Based to Data-Driven. Society for Industrial and Applied Mathematics, Philadelphia, PA, January 2022. ISBN 978-1-61197-696-0 978-1-61197-697-7. URL: https://epubs.siam.org/doi/book/10.1137/1.9781611976977 (visited on 2024-01-03), doi:10.1137/1.9781611976977.">1</a>]</span> there are basic explanations of uncertainty quantification, inverse problems and their use for digital twins.</p>
-<div class="section" id="table-of-contents">
+<section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayes Theory</span></p>
@@ -392,8 +394,8 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="theory/042EKITheory.html">7. Ensemble Kalman Inversion</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="references">
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <div class="docutils container" id="id8">
 <dl class="citation">
@@ -420,8 +422,8 @@ document.write(`
 </dd>
 </dl>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

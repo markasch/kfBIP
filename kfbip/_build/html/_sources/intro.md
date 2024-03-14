@@ -1,4 +1,4 @@
-# Welcome to kfBIP
+# Welcome to _Kalman Filters: from Bayes to Inverse Problems_
 
 This book contains a presentation of Kalman filters, from basics to ensemble filters. A large number of examples are provided in the form of jupyter notebooks. Then the notion of Bayesian inverse problems (BIP) is introduced.  Finally, there is a detailed presentation of the use of the ensemble Kalman filter as a basis for the solution of inverse problems. This is denoted EKI, or ensemble Kalman inversion, following the magnificent work of Andrew Stuart and his collaborators.
 

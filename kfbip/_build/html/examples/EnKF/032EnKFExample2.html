@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>5.4. Example 2: Lorenz63 system &#8212; kfBIP</title>
   
   
@@ -67,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/EnKF/032EnKFExample2';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6. Bayesian Inversion" href="../../theory/041BIPTheory.html" />
+    <link rel="next" title="5.5. Example 3: SIR Model" href="032EnKFExample3.html" />
     <link rel="prev" title="5.3. Example 1: noisy pendulum" href="032EnKFExample1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../theory/031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -194,8 +196,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../theory/041BIPTheory.html">6. Bayesian Inversion</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/042EKITheory.html">7. Ensemble Kalman Inversion</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../EKI/042EKIExample1.html">7.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../EKI/042EKIExample2.html">7.2. EX 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EKI/042EKIExample1.html">7.5. EX 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EKI/042EKIExample2.html">7.6. EX 2</a></li>
 </ul>
 </li>
 </ul>
@@ -359,11 +361,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="example-2-lorenz63-system">
+  <section class="tex2jax_ignore mathjax_ignore" id="example-2-lorenz63-system">
 <h1><span class="section-number">5.4. </span>Example 2: Lorenz63 system<a class="headerlink" href="#example-2-lorenz63-system" title="Permalink to this heading">#</a></h1>
 <p>In this example, we will concentrate on DA methods applied to the Lorenz systems of ordinary differential equations. These systems exhibit chaotic behavior and as such are considered as excellent toy models for complex phenomena, in particular for simulation of weather. The Lorenz-63 system is given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-673cd94e-80c0-4657-8e36-28bc258a0f08">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-673cd94e-80c0-4657-8e36-28bc258a0f08" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-823a7378-ce2e-47f9-9ebf-09f20af69fc3">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-823a7378-ce2e-47f9-9ebf-09f20af69fc3" title="Permalink to this equation">#</a></span>\[\begin{align}
 	 \frac{\mathrm{d} x}{\mathrm{d} t} &amp;= -\sigma(x-y), \nonumber  \\
 	\frac{\mathrm{d} y}{\mathrm{d} t}  &amp;= \rho x-y-xz,  \label{eq:lorenz} \\
 	\frac{\mathrm{d} z}{\mathrm{d} t}  &amp;= xy -\beta z,   \nonumber
@@ -489,7 +491,7 @@ stable orbits, around the points</p>
 <img alt="../../_images/fe78d26ac33b113204968fa5811d0ced6be1a2f2e5bbf9f363f1fd954169bb50.png" src="../../_images/fe78d26ac33b113204968fa5811d0ced6be1a2f2e5bbf9f363f1fd954169bb50.png" />
 </div>
 </div>
-<div class="section" id="ensemble-kf-for-data-assimilation">
+<section id="ensemble-kf-for-data-assimilation">
 <h2><span class="section-number">5.4.1. </span>Ensemble KF for Data Assimilation<a class="headerlink" href="#ensemble-kf-for-data-assimilation" title="Permalink to this heading">#</a></h2>
 <p>Here we will generalize the ensemble Kalman filter to take into account the possibility of sparse observations. This is usually the case in real-life systems, where observations are only available et fixed instants, and hence the filtering can only be applied at these times. Inbetween observations, the system evolves freely (without correction) according to its underlying state equation.</p>
 <p>Suppose we have <span class="math notranslate nohighlight">\(N_y\)</span> measurements/observations at an interval of <span class="math notranslate nohighlight">\(\delta t_y.\)</span> This gives measurements for times <span class="math notranslate nohighlight">\(t_0 \le t \le t_m,\)</span> where <span class="math notranslate nohighlight">\(t_m = N_m \delta t_m.\)</span> This can be considered as the assimilation window. The system then evolves freely for <span class="math notranslate nohighlight">\(t &gt; t_m\)</span> until some final forecast window time <span class="math notranslate nohighlight">\(t_f.\)</span> The state, or equation itself is simulated with a smaller <span class="math notranslate nohighlight">\(\delta t\)</span> and for a large number <span class="math notranslate nohighlight">\(N_t\)</span> steps, giving <span class="math notranslate nohighlight">\(t_f = N_t \delta t.\)</span> Usually, for real life systems, we will have</p>
@@ -535,32 +537,32 @@ stable orbits, around the points</p>
     <span class="c1"># Solve system and generate noisy observations</span>
     <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>     <span class="c1"># number of time steps</span>
     <span class="n">Nm</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T_m</span><span class="o">/</span><span class="n">dt_m</span><span class="p">)</span> <span class="c1"># number of observations</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span> <span class="c1"># time vector</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span> <span class="c1"># time vector (including 0 and T)</span>
     <span class="n">ind_m</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">dt_m</span><span class="o">/</span><span class="n">dt</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">T_m</span><span class="o">/</span><span class="n">dt</span><span class="p">),</span><span class="n">Nm</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># obs. indices</span>
     <span class="n">t_m</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">ind_m</span><span class="p">]</span> <span class="c1"># measurement time vector</span>
     <span class="n">x0True</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span> <span class="c1"># True initial conditions</span>
     <span class="n">sqrt_Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span> <span class="c1"># noise std dev.</span>
     <span class="n">sqrt_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
     <span class="c1"># initialize (correctly!)</span>
-    <span class="n">xTrue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">dim_x</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">xTrue</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0True</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dim_y</span><span class="p">,</span> <span class="n">Nm</span><span class="p">))</span>
+    <span class="n">xTrue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim_x</span><span class="p">])</span>
+    <span class="n">xTrue</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">x0True</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Nm</span><span class="p">,</span> <span class="n">dim_y</span><span class="p">))</span>
     <span class="n">km</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># index for measurement times</span>
-    <span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">xTrue</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">sig_v</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">dim_y</span><span class="p">)</span> 
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">xTrue</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span> <span class="o">+</span> <span class="n">sig_v</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">dim_y</span><span class="p">)</span> 
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nt</span><span class="p">):</span>
         <span class="n">w_k</span> <span class="o">=</span> <span class="n">sqrt_Q</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">dim_x</span><span class="p">)</span>
-        <span class="n">xTrue</span><span class="p">[:,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">RK4</span><span class="p">(</span><span class="n">Lorenz63</span><span class="p">,</span><span class="n">xTrue</span><span class="p">[:,</span><span class="n">k</span><span class="p">],</span> <span class="n">dt</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="c1">#+ w_k</span>
+        <span class="n">xTrue</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">RK4</span><span class="p">(</span><span class="n">Lorenz63</span><span class="p">,</span><span class="n">xTrue</span><span class="p">[</span><span class="n">k</span><span class="p">,:],</span> <span class="n">dt</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="c1">#+ w_k</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">km</span> <span class="o">&lt;</span> <span class="n">Nm</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span> <span class="o">==</span> <span class="n">ind_m</span><span class="p">[</span><span class="n">km</span><span class="p">]):</span>
             <span class="n">v_k</span> <span class="o">=</span> <span class="n">sqrt_R</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">dim_y</span><span class="p">)</span>
-            <span class="n">y</span><span class="p">[:,</span><span class="n">km</span><span class="p">]</span>     <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">xTrue</span><span class="p">[:,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">v_k</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">km</span><span class="p">,:]</span>     <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">xTrue</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,:])</span> <span class="o">+</span> <span class="n">v_k</span>
             <span class="n">km</span> <span class="o">=</span> <span class="n">km</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="c1"># plot state and measurements</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">flat</span>
     <span class="c1">#t = T*dt</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xTrue</span><span class="p">[</span><span class="n">k</span><span class="p">,:],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">ind_m</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">,:],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">fillstyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> \
+        <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xTrue</span><span class="p">[:,</span><span class="n">k</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">ind_m</span><span class="p">],</span><span class="n">y</span><span class="p">[:,</span><span class="n">k</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">fillstyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> \
                    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observation&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T_m</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>    
@@ -590,15 +592,11 @@ stable orbits, around the points</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">enKF_Lorenz63_DA</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ind_m</span><span class="p">,</span> <span class="n">Nt</span><span class="p">,</span> <span class="n">Nm</span><span class="p">,</span> <span class="n">Ne</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run DA of the Lorenz63 system using the stochastic </span>
-<span class="sd">    ensemble filter </span>
+<span class="sd">    ensemble filter with sparse observations in the DA</span>
+<span class="sd">    window, defined by time index set `ind_m`.</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        dt: time step for state evolution</span>
-<span class="sd">        T:  time interval for state evolution</span>
-<span class="sd">        dt_m: time interval between 2 measurements (can equal dt for dense observations)</span>
-<span class="sd">        T_m: time interval for observations</span>
-<span class="sd">        sig_w: state noise sd., cov. Q = sig_w**2 x np.eye(3)</span>
-<span class="sd">        sig_v: measurement noise sd., cov. R = sig_v**2 x np.eye(3) </span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># parameters Lorenz63</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="mf">10.0</span>     
@@ -607,7 +605,6 @@ stable orbits, around the points</p>
     <span class="k">def</span> <span class="nf">Hx</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
         <span class="n">w</span> <span class="o">=</span> <span class="n">u</span>
         <span class="k">return</span> <span class="n">w</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="c1"># here we assume Nt x Ny</span>
     <span class="n">Nx</span>     <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">Ny</span>     <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">enkf_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">Nx</span><span class="p">))</span>
@@ -633,7 +630,7 @@ stable orbits, around the points</p>
         <span class="n">P</span> <span class="o">=</span> <span class="n">Xfp</span> <span class="o">@</span> <span class="n">Xfp</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">Ne</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>      <span class="c1"># predict covariance </span>
         <span class="c1"># ==== prepare analysis step =====</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">i_m</span> <span class="o">&lt;</span> <span class="n">Nm</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">==</span> <span class="n">ind_m</span><span class="p">[</span><span class="n">i_m</span><span class="p">]):</span>
-            <span class="n">HXf</span> <span class="o">=</span> <span class="n">Hx</span><span class="p">(</span><span class="n">Xf</span><span class="p">)</span>              <span class="c1"># nonlinear observation</span>
+            <span class="n">HXf</span> <span class="o">=</span> <span class="n">Hx</span><span class="p">(</span><span class="n">Xf</span><span class="p">)</span>                    <span class="c1"># nonlinear observation</span>
             <span class="n">mY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">HXf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>       <span class="c1"># observation ensemble mean</span>
             <span class="n">HXp</span> <span class="o">=</span> <span class="n">HXf</span> <span class="o">-</span> <span class="n">mY</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>         <span class="c1"># observation anomaly</span>
             <span class="n">S</span> <span class="o">=</span> <span class="p">(</span><span class="n">HXp</span> <span class="o">@</span> <span class="n">HXp</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Ne</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">R</span>  <span class="c1"># observation covariance</span>
@@ -642,10 +639,10 @@ stable orbits, around the points</p>
             <span class="n">ypert</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i_m</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span>  <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Ny</span><span class="p">,</span> <span class="n">Ne</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
             <span class="n">d</span> <span class="o">=</span> <span class="n">ypert</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">HXf</span>
             <span class="c1"># ==== correct/analyze ====</span>
-            <span class="n">X</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="n">Xf</span> <span class="o">+</span> <span class="n">K</span> <span class="o">@</span> <span class="n">d</span>         <span class="c1"># update state ensemble</span>
-            <span class="n">mX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">[:,:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="c1"># state analysis ensemble mean</span>
-            <span class="n">Xap</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,:]</span> <span class="o">-</span> <span class="n">mX</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># state analysis anomaly</span>
-            <span class="n">P</span> <span class="o">=</span> <span class="n">Xap</span> <span class="o">@</span> <span class="n">Xap</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="p">(</span> <span class="n">Ne</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>     <span class="c1"># update covariance</span>
+            <span class="n">X</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="n">Xf</span> <span class="o">+</span> <span class="n">K</span> <span class="o">@</span> <span class="n">d</span>          <span class="c1"># update state ensemble</span>
+            <span class="n">mX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">[:,:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># state analysis ensemble mean</span>
+            <span class="n">Xap</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,:]</span> <span class="o">-</span> <span class="n">mX</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>   <span class="c1"># state analysis anomaly</span>
+            <span class="n">P</span> <span class="o">=</span> <span class="n">Xap</span> <span class="o">@</span> <span class="n">Xap</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="p">(</span> <span class="n">Ne</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># update covariance</span>
             <span class="n">i_m</span> <span class="o">=</span> <span class="n">i_m</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">X</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="n">Xf</span>  <span class="c1"># when there is no obs, then state=forecast</span>
@@ -689,9 +686,9 @@ stable orbits, around the points</p>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">flat</span>
 
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xTrue</span><span class="p">[</span><span class="n">k</span><span class="p">,:],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span><span class="c1">#, linewidth = 3)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xTrue</span><span class="p">[:,</span><span class="n">k</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span><span class="c1">#, linewidth = 3)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Xa</span><span class="p">[:,</span><span class="n">k</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;EnKF analysis&#39;</span><span class="p">)</span><span class="c1">#, linewidth = 3)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">ind_m</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">,:],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">fillstyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> \
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">ind_m</span><span class="p">],</span><span class="n">y</span><span class="p">[:,</span><span class="n">k</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">fillstyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> \
                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observation&#39;</span><span class="p">)</span><span class="c1">#, markersize = 8, markeredgewidth = 2)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Xb</span><span class="p">[:,</span><span class="n">k</span><span class="p">],</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Unfiltered&#39;</span><span class="p">)</span><span class="c1">#, linewidth = 3)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
@@ -708,16 +705,17 @@ stable orbits, around the points</p>
 <img alt="../../_images/3080f0b709e13315c87f9edb8c32e00455981ad40835ca900bb14b323c1b9298.png" src="../../_images/3080f0b709e13315c87f9edb8c32e00455981ad40835ca900bb14b323c1b9298.png" />
 </div>
 </div>
-</div>
-<div class="section" id="conclusion">
+</section>
+<section id="conclusion">
 <h2><span class="section-number">5.4.2. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>The ensemble Kalman filter, even with very sparse observations and a chaotic system, does an excellent job of</p>
 <ol class="arabic simple">
-<li><p>tracking within the DA window</p></li>
+<li><p>tracking within the DA window,</p></li>
 <li><p>forecasting way beyond the window, whereas the unfiltered/unassimilated, freely evolving system deviates considerably, as is to be expected from the chaotic Lorenz system.</p></li>
 </ol>
-</div>
-</div>
+<p>From <span class="math notranslate nohighlight">\(t \approx 6,\)</span> the KF starts to deviate very slightly, mostly a phase difference. However, in real situations, there will already be new measurements available by this time. Then the KF analysis will kick in again, and rectify the trajectory.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -759,11 +757,11 @@ stable orbits, around the points</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../theory/041BIPTheory.html"
+       href="032EnKFExample3.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Bayesian Inversion</p>
+        <p class="prev-next-title"><span class="section-number">5.5. </span>Example 3: SIR Model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

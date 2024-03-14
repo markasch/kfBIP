@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>4. Nonlinear Kalman Filters &#8212; kfBIP</title>
   
   
@@ -187,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -372,9 +374,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="nonlinear-kalman-filters">
+  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-kalman-filters">
 <h1><span class="section-number">4. </span>Nonlinear Kalman Filters<a class="headerlink" href="#nonlinear-kalman-filters" title="Permalink to this heading">#</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2><span class="section-number">4.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Recall that the Kalman filter can be used for</p>
 <ul class="simple">
@@ -382,8 +384,8 @@ document.write(`
 <li><p>parameter estimation—this is the inverse problem based on filtering with a pseudo-time</p></li>
 </ul>
 <p>Kalman filters are linear (and Gaussian) or nonlinear. Among the nonlinear approaches, the Ensemble Kalman filter (EnKF) provides a <em>derivative-free</em> approach to the solution of inverse problems.</p>
-</div>
-<div class="section" id="recall-kalman-filter-problem-general-formulation">
+</section>
+<section id="recall-kalman-filter-problem-general-formulation">
 <h2><span class="section-number">4.2. </span>Recall: Kalman filter problem - general formulation<a class="headerlink" href="#recall-kalman-filter-problem-general-formulation" title="Permalink to this heading">#</a></h2>
 <p>We present a very general formulation that will later be convenient for joint state and parameter estimation problems.
 Consider a discrete-time dynamical system with noisy state transitions and noisy observations.</p>
@@ -433,7 +435,7 @@ Consider a discrete-time dynamical system with noisy state transitions and noisy
 <li><p>Let  <span class="math notranslate nohighlight">\((\hat{m}_{j+1}, \hat{C}_{j+1})\)</span> denote the mean and covariance of <span class="math notranslate nohighlight">\(v_{j+1} \vert Y_j\)</span>  and note that these entirely characterize the random variable since it is Gaussian.</p></li>
 <li><p>Derive the map <span class="math notranslate nohighlight">\((m_j, C_j) \mapsto (m_{j+1}, C_{j+1})\)</span> using the previous step.</p></li>
 </ol>
-<div class="section" id="prediction-forecast">
+<section id="prediction-forecast">
 <h3><span class="section-number">4.2.1. </span>Prediction/Forecast<a class="headerlink" href="#prediction-forecast" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ \mathbb{P}(v_n \vert y_1, \ldots, y_n) \mapsto \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_n) \]</div>
@@ -458,8 +460,8 @@ Consider a discrete-time dynamical system with noisy state transitions and noisy
      \end{split}\]</div>
 </li>
 </ul>
-</div>
-<div class="section" id="correction-analysis">
+</section>
+<section id="correction-analysis">
 <h3><span class="section-number">4.2.2. </span>Correction/Analysis<a class="headerlink" href="#correction-analysis" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_n) \mapsto \mathbb{P}(v_{n+1} \vert y_1, \ldots, y_{n+1}) \]</div>
@@ -486,16 +488,16 @@ Consider a discrete-time dynamical system with noisy state transitions and noisy
      \end{split}\]</div>
 </li>
 </ul>
-</div>
-<div class="section" id="loop-over-time">
+</section>
+<section id="loop-over-time">
 <h3><span class="section-number">4.2.3. </span>Loop over time<a class="headerlink" href="#loop-over-time" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>set <span class="math notranslate nohighlight">\(j = j+1\)</span></p></li>
 <li><p>go to step P1</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="state-space-formulation">
+</section>
+</section>
+<section id="state-space-formulation">
 <h2><span class="section-number">4.3. </span>State-space formulation<a class="headerlink" href="#state-space-formulation" title="Permalink to this heading">#</a></h2>
 <p>In classical filter theory, a state space formulation is usually used.</p>
 <div class="math notranslate nohighlight">
@@ -507,12 +509,12 @@ Consider a discrete-time dynamical system with noisy state transitions and noisy
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(h\)</span> are nonlinear, differentiable functions with Jacobian matrices <span class="math notranslate nohighlight">\(D_f\)</span> and <span class="math notranslate nohighlight">\(D_h\)</span> respectively, <span class="math notranslate nohighlight">\(w_k \sim \mathcal{N}(0,Q),\)</span> <span class="math notranslate nohighlight">\(v_k \sim \mathcal{N}(0,R).\)</span></p>
 <p>The 2-step filter:</p>
-<div class="section" id="initialization">
+<section id="initialization">
 <h3><span class="section-number">4.3.1. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ x_0, \quad P_0 \]</div>
-</div>
-<div class="section" id="prediction">
+</section>
+<section id="prediction">
 <h3><span class="section-number">4.3.2. </span>1. Prediction<a class="headerlink" href="#prediction" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
@@ -521,8 +523,8 @@ Consider a discrete-time dynamical system with noisy state transitions and noisy
  &amp;&amp; P_{k+1}^- = D_f P_k D_f^{\mathrm{T}} + Q 
 \end{eqnarray} 
 \end{split}\]</div>
-</div>
-<div class="section" id="correction">
+</section>
+<section id="correction">
 <h3><span class="section-number">4.3.3. </span>2. Correction<a class="headerlink" href="#correction" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
@@ -534,22 +536,22 @@ Consider a discrete-time dynamical system with noisy state transitions and noisy
             \quad (= P_{k+1}^- - K_{k+1} S K^{\mathrm{T}}_{k+1})
 \end{eqnarray} 
 \end{split}\]</div>
-</div>
-<div class="section" id="loop">
+</section>
+<section id="loop">
 <h3><span class="section-number">4.3.4. </span>Loop<a class="headerlink" href="#loop" title="Permalink to this heading">#</a></h3>
 <p>Set <span class="math notranslate nohighlight">\(k = k+1\)</span> and go to step 1.</p>
-</div>
-</div>
-<div class="section" id="other-nonlinear-filters">
+</section>
+</section>
+<section id="other-nonlinear-filters">
 <h2><span class="section-number">4.4. </span>Other nonlinear filters<a class="headerlink" href="#other-nonlinear-filters" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>unscented Kalman filter</p></li>
 <li><p>particle filter</p></li>
 </ul>
-</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {

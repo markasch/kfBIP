@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>6. Bayesian Inversion &#8212; kfBIP</title>
   
   
@@ -62,11 +63,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'theory/041BIPTheory';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="7. Ensemble Kalman Inversion" href="042EKITheory.html" />
-    <link rel="prev" title="5.4. Example 2: Lorenz63 system" href="../examples/EnKF/032EnKFExample2.html" />
+    <link rel="prev" title="5.5. Example 3: SIR Model" href="../examples/EnKF/032EnKFExample3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -185,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="031EnKFTheory.html">5. ENSEMBLE Kalman Filter</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample1.html">5.3. Example 1: noisy pendulum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample2.html">5.4. Example 2: Lorenz63 system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EnKF/032EnKFExample3.html">5.5. Example 3: SIR Model</a></li>
 </ul>
 </li>
 </ul>
@@ -192,8 +196,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Bayesian Inversion</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="042EKITheory.html">7. Ensemble Kalman Inversion</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/EKI/042EKIExample1.html">7.1. EX 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/EKI/042EKIExample2.html">7.2. EX 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EKI/042EKIExample1.html">7.5. EX 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EKI/042EKIExample2.html">7.6. EX 2</a></li>
 </ul>
 </li>
 </ul>
@@ -321,7 +325,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -337,6 +343,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">6.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">6.2. Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">6.3. Examples</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -346,9 +362,64 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="bayesian-inversion">
+  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-inversion">
 <h1><span class="section-number">6. </span>Bayesian Inversion<a class="headerlink" href="#bayesian-inversion" title="Permalink to this heading">#</a></h1>
-</div>
+<section id="introduction">
+<h2><span class="section-number">6.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Bayesian approaches, provide a foundation for inference from noisy and limited data, a natural mechanism for regularization in the form of prior information, and in very general cases—e.g., non-linear forward operators, non-Gaussian errors—a quantitative assessment of uncertainty in the results. Indeed, the output of Bayesian inference is not a single value for the quantity of interest, but a probability distribution that summarizes all available information about this quantity, be it a vector of parameters or a function (i.e., a signal or spatial field). Exploration of this posterior distribution—and thus estimating means, higher moments, and marginal densities of the inverse solution—may require repeated evaluations of the forward operator. For complex physical models and high-dimensional model spaces, this can be computationally prohibitive.</p>
+<p>Bayesian inference provides an attractive setting for the solution of inverse problems. Measurement errors,forward model uncertainties, and complex prior information can all be combined to yield a rigorous and quantitative assessment of uncertainty in the solution of the inverse problem.</p>
+</section>
+<section id="theory">
+<h2><span class="section-number">6.2. </span>Theory<a class="headerlink" href="#theory" title="Permalink to this heading">#</a></h2>
+<p>A Bayesian Inverse Problem (BIP) is defined as follows:</p>
+<ul class="simple">
+<li><p>Given:</p>
+<ul>
+<li><p>observational data and their uncertainties,</p></li>
+<li><p>a (possibly stochastic) forward model that maps model parameters to observations,</p></li>
+<li><p>and a prior probability distribution on model parameters that encodes any prior knowledge or assumptions about the parameters.</p></li>
+</ul>
+</li>
+<li><p>Find:</p>
+<ul>
+<li><p>the posterior probability distribution of the parameters conditioned on the observational data.</p></li>
+</ul>
+</li>
+</ul>
+<p>This probability density function (pdf) is defined as the Bayesian
+solution of the inverse problem. The posterior distribution assigns
+to any candidate set of parameter fields our belief (expressed as
+a probability) that a member of this candidate set is the ``true’’
+parameter field that gave rise to the observed data.</p>
+<p>Of course, all of this is summarized in Bayes’ theorem, expressed as folllows.</p>
+<p>What can be said about the value of an unknown or poorly known variable/parameter,
+<span class="math notranslate nohighlight">\(\theta,\)</span> that represents the parameters of the system, if we have
+some measured data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> and a model <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> of the
+underlying mechanism that generated the data? This is precisely the
+Bayesian context, where we seek a quantification of the uncertainty
+in our knowledge of the parameters that according to Bayes’ Theorem
+takes the form</p>
+<div class="amsmath math notranslate nohighlight" id="equation-00f58c6f-a5b8-474c-9652-31304b6019bd">
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-00f58c6f-a5b8-474c-9652-31304b6019bd" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:Bayes-2}
+p(\theta\mid\mathcal{D})=\frac{p(\mathcal{D}\mid\theta)p(\theta)}{p(\mathcal{D})}=\frac{p(\mathcal{D}\mid\theta)p(\theta)}{\int_{\theta}p(\mathcal{D}\mid\theta)p(\theta)}.
+\end{equation}\]</div>
+<p>Here, the physical model that generates the data is represented by the conditional probability
+(also known as the <em>likelihood</em>) <span class="math notranslate nohighlight">\(p(\mathcal{D}\mid\theta),\)</span>
+and the prior knowledge of the system by the term <span class="math notranslate nohighlight">\(p(\theta).\)</span> The
+denominator is considered as a normalizing factor and represents the
+total probability of <span class="math notranslate nohighlight">\(\mathcal{D}.\)</span> From these we can then calculate
+the resulting <em>posterior probability</em>, <span class="math notranslate nohighlight">\(p(\theta\mid\mathcal{D}).\)</span>  A generalization can include a model, <span class="math notranslate nohighlight">\(\mathcal{M},\)</span> for the parameters. In this case (6.1) can be written as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d364b72f-1d03-4486-a730-7c8ac5705ce1">
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-d364b72f-1d03-4486-a730-7c8ac5705ce1" title="Permalink to this equation">#</a></span>\[\begin{equation}\label{eq:Bayes-3}
+	p(\theta\mid\mathcal{D},\mathcal{M})=\frac{p(\mathcal{D}\mid\theta,\mathcal{M})p(\theta\mid \mathcal{M})}{p(\mathcal{D}\mid \mathcal{M})}.
+\end{equation}\]</div>
+<p>This is depicted in the flowchart.</p>
+<a class="reference internal image-reference" href="../_images/Bayes-flowchart.png"><img alt="../_images/Bayes-flowchart.png" src="../_images/Bayes-flowchart.png" style="width: 259px; height: 346px;" /></a>
+</section>
+<section id="examples">
+<h2><span class="section-number">6.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -381,12 +452,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../examples/EnKF/032EnKFExample2.html"
+       href="../examples/EnKF/032EnKFExample3.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5.4. </span>Example 2: Lorenz63 system</p>
+        <p class="prev-next-title"><span class="section-number">5.5. </span>Example 3: SIR Model</p>
       </div>
     </a>
     <a class="right-next"
@@ -404,6 +475,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">6.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">6.2. Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">6.3. Examples</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
